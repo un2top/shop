@@ -3,7 +3,8 @@
         nav svg {
             height: 20px;
         }
-        nav .hidden{
+
+        nav .hidden {
             display: block;
         }
     </style>
@@ -67,60 +68,69 @@
                         </div>
                         <div class="row product-grid-3">
                             @foreach($products as $product)
-                            <div class="col-lg-4 col-md-4 col-6 col-sm-6">
-                                <div class="product-cart-wrap mb-30">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="{{ route('product.details', ['slug'=>$product->slug]) }}">
-                                                <img class="default-img" src="{{ asset('assets/imgs/shop/product-')}}{{ $product->id }}-1.jpg" alt="{{ $product->name }}">
-                                                <img class="hover-img" src="{{ asset('assets/imgs/shop/product-')}}{{ $product->id }}-2.jpg" alt="{{ $product->name }}">
-                                            </a>
+                                <div class="col-lg-4 col-md-4 col-6 col-sm-6">
+                                    <div class="product-cart-wrap mb-30">
+                                        <div class="product-img-action-wrap">
+                                            <div class="product-img product-img-zoom">
+                                                <a href="{{ route('product.details', ['slug'=>$product->slug]) }}">
+                                                    <img class="default-img"
+                                                         src="{{ asset('assets/imgs/shop/product-')}}{{ $product->id }}-1.jpg"
+                                                         alt="{{ $product->name }}">
+                                                    <img class="hover-img"
+                                                         src="{{ asset('assets/imgs/shop/product-')}}{{ $product->id }}-2.jpg"
+                                                         alt="{{ $product->name }}">
+                                                </a>
+                                            </div>
+                                            <div class="product-action-1">
+                                                <a aria-label="Quick view" class="action-btn hover-up"
+                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                    <i class="fi-rs-search"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
+                                                   href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up"
+                                                   href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                            </div>
+                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="hot">Hot</span>
+                                            </div>
                                         </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                                <i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-category">
-                                            <a href="shop.html">Music</a>
-                                        </div>
-                                        <h2><a href="product-details.html">{{ $product->name }}</a></h2>
-                                        <div class="rating-result" title="90%">
+                                        <div class="product-content-wrap">
+                                            <div class="product-category">
+                                                <a href="shop.html">Music</a>
+                                            </div>
+                                            <h2><a href="product-details.html">{{ $product->name }}</a></h2>
+                                            <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
                                             </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>${{ $product->price }} </span>
-{{--                                            <span class="old-price">$245.8</span>--}}
-                                        </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.php"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
+                                            <div class="product-price">
+                                                <span>$ {{ $product->regular_price }} </span>
+                                                {{--                                            <span class="old-price">$245.8</span>--}}
+                                            </div>
+                                            <div class="product-action-1 show">
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="#"
+                                                   wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i
+                                                        class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <!--pagination-->
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             {{ $products->links() }}
-{{--                            <nav aria-label="Page navigation example">--}}
-{{--                                <ul class="pagination justify-content-start">--}}
-{{--                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">02</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">03</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">16</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>--}}
-{{--                                </ul>--}}
-{{--                            </nav>--}}
+                            {{--                            <nav aria-label="Page navigation example">--}}
+                            {{--                                <ul class="pagination justify-content-start">--}}
+                            {{--                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>--}}
+                            {{--                                    <li class="page-item"><a class="page-link" href="#">02</a></li>--}}
+                            {{--                                    <li class="page-item"><a class="page-link" href="#">03</a></li>--}}
+                            {{--                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>--}}
+                            {{--                                    <li class="page-item"><a class="page-link" href="#">16</a></li>--}}
+                            {{--                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>--}}
+                            {{--                                </ul>--}}
+                            {{--                            </nav>--}}
                         </div>
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
@@ -151,7 +161,8 @@
                                     <div id="slider-range"></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span><input type="text" id="amount" name="price" placeholder="Add Your Price">
+                                            <span>Range:</span><input type="text" id="amount" name="price"
+                                                                      placeholder="Add Your Price">
                                         </div>
                                     </div>
                                 </div>
@@ -160,25 +171,36 @@
                                 <div class="list-group-item mb-10 mt-10">
                                     <label class="fw-900">Color</label>
                                     <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                        <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                               id="exampleCheckbox1" value="">
+                                        <label class="form-check-label"
+                                               for="exampleCheckbox1"><span>Red (56)</span></label>
                                         <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="">
-                                        <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                               id="exampleCheckbox2" value="">
+                                        <label class="form-check-label"
+                                               for="exampleCheckbox2"><span>Green (78)</span></label>
                                         <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="">
-                                        <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                               id="exampleCheckbox3" value="">
+                                        <label class="form-check-label"
+                                               for="exampleCheckbox3"><span>Blue (54)</span></label>
                                     </div>
                                     <label class="fw-900 mt-15">Item Condition</label>
                                     <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="">
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                               id="exampleCheckbox11" value="">
                                         <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
                                         <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="">
-                                        <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished (27)</span></label>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                               id="exampleCheckbox21" value="">
+                                        <label class="form-check-label"
+                                               for="exampleCheckbox21"><span>Refurbished (27)</span></label>
                                         <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="">
-                                        <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                               id="exampleCheckbox31" value="">
+                                        <label class="form-check-label"
+                                               for="exampleCheckbox31"><span>Used (45)</span></label>
                                     </div>
                                 </div>
                             </div>
