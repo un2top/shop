@@ -40,6 +40,16 @@ class ShopComponent extends Component
     public function addToWitchList($product_id, $product_name, $product_price){
         Cart::instance('wishlist')->add($product_id, $product_name,1, $product_price)->associate('App\Models\Product');
         $this->emitTo('wish-list-icon-component', 'refreshComponent');
+    }
+
+    public function removeFromWishList($product_id){
+        foreach (Cart::instance('wishlist')->content() as $witem){
+            if($witem->id == $product_id){
+                Cart::instance('wishlist')->remove($witem->rowId);
+                $this->emitTo('wish-list-icon-component', 'refreshComponent');
+                return;
+            }
+        }
 
     }
 
