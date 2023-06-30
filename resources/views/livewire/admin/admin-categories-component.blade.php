@@ -47,7 +47,9 @@
                                             <td>{{++$i}}</td>
                                             <td>{{$category->name}}</td>
                                             <td>{{$category->slug}}</td>
-                                            <td></td>
+                                            <td>
+                                                <a href="{{ route('admin.category.edit', $category->id) }}" class="text-info">Редактировать</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
