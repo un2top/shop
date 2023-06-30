@@ -7,6 +7,15 @@
         nav .hidden {
             display: block;
         }
+
+        .wishlisted {
+            background-color: #F15412 !important;
+            border: 1px solid transparent !important;
+        }
+
+        .wishlisted i{
+            color: #fff !important;
+        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -23,7 +32,8 @@
                     <div class="col-lg-9">
                         <div class="shop-product-fillter">
                             <div class="totall-product">
-                                <p> We found <strong class="text-brand">{{ $products->total() }}</strong> items for you!</p>
+                                <p> We found <strong class="text-brand">{{ $products->total() }}</strong> items for you!
+                                </p>
                             </div>
                             <div class="sort-by-product-area">
                                 <div class="sort-by-cover mr-10">
@@ -37,10 +47,14 @@
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="{{ $pageSize == 12 ? 'active': '' }}" href="#" wire:click.prevent="changePageSize(12)">12</a></li>
-                                            <li><a class="{{ $pageSize == 15 ? 'active': '' }}" href="#" wire:click.prevent="changePageSize(15)">15</a></li>
-                                            <li><a class="{{ $pageSize == 25 ? 'active': '' }}" href="#" wire:click.prevent="changePageSize(25)">25</a></li>
-                                            <li><a class="{{ $pageSize == 32 ? 'active': '' }}" href="#" wire:click.prevent="changePageSize(32)">32</a></li>
+                                            <li><a class="{{ $pageSize == 12 ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changePageSize(12)">12</a></li>
+                                            <li><a class="{{ $pageSize == 15 ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changePageSize(15)">15</a></li>
+                                            <li><a class="{{ $pageSize == 25 ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changePageSize(25)">25</a></li>
+                                            <li><a class="{{ $pageSize == 32 ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changePageSize(32)">32</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -55,16 +69,27 @@
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="{{ $orderBy == 'По умолчанию' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('По умолчанию')">По умолчанию</a></li>
-                                            <li><a class="{{ $orderBy == 'Сначала недорогие' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала недорогие')">Сначала недорогие</a></li>
-                                            <li><a class="{{ $orderBy == 'Сначала дорогие' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала дорогие')">Сначала дорогие</a></li>
-                                            <li><a class="{{ $orderBy == 'Сначала новые' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала новые')">Сначала новые</a></li>
+                                            <li><a class="{{ $orderBy == 'По умолчанию' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('По умолчанию')">По умолчанию</a>
+                                            </li>
+                                            <li><a class="{{ $orderBy == 'Сначала недорогие' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('Сначала недорогие')">Сначала
+                                                    недорогие</a></li>
+                                            <li><a class="{{ $orderBy == 'Сначала дорогие' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('Сначала дорогие')">Сначала
+                                                    дорогие</a></li>
+                                            <li><a class="{{ $orderBy == 'Сначала новые' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('Сначала новые')">Сначала новые</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row product-grid-3">
+                            @php
+                                $witems = Cart::instance('wishlist')->content()->pluck('id');
+                            @endphp
                             @foreach($products as $product)
                                 <div class="col-lg-4 col-md-4 col-6 col-sm-6">
                                     <div class="product-cart-wrap mb-30">
@@ -107,6 +132,13 @@
                                                 {{--                                            <span class="old-price">$245.8</span>--}}
                                             </div>
                                             <div class="product-action-1 show">
+                                                @if($witems->contains($product->id))
+                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up wishlisted"
+                                                       href="#"><i class="fi-rs-heart"></i></a>
+                                                @else
+                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWitchList({{ $product->id }}, '{{$product->name}}', {{ $product->regular_price }})">
+                                                        <i class="fi-rs-heart"></i></a>
+                                                @endif
                                                 <a aria-label="Add To Cart" class="action-btn hover-up" href="#"
                                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i
                                                         class="fi-rs-shopping-bag-add"></i></a>
@@ -140,7 +172,9 @@
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
                             <ul class="categories">
                                 @foreach($categories as $category)
-                                <li><a href="{{ route('product.category', ['slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                                    <li>
+                                        <a href="{{ route('product.category', ['slug'=>$category->slug]) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -155,7 +189,8 @@
                                     <div id="slider-range" wire:ignore></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span> <span class="text-info">${{$min_value}}</span> - <span class="text-info">${{ $max_value }}</span>
+                                            <span>Range:</span> <span class="text-info">${{ $min_value }}</span> - <span
+                                                class="text-info">${{ $max_value }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +242,7 @@
                             </div>
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="assets/imgs/shop/thumbnail-3.jpg" alt="#">
+                                    <img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}" alt="#">
                                 </div>
                                 <div class="content pt-10">
                                     <h5><a href="product-details.html">Chen Cardigan</a></h5>
@@ -219,7 +254,7 @@
                             </div>
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="assets/imgs/shop/thumbnail-4.jpg" alt="#">
+                                    <img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}" alt="#">
                                 </div>
                                 <div class="content pt-10">
                                     <h6><a href="product-details.html">Chen Sweater</a></h6>
@@ -231,7 +266,7 @@
                             </div>
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="assets/imgs/shop/thumbnail-5.jpg" alt="#">
+                                    <img src="{{ asset('assets/imgs/shop/thumbnail-5.jpg') }}" alt="#">
                                 </div>
                                 <div class="content pt-10">
                                     <h6><a href="product-details.html">Colorful Jacket</a></h6>
@@ -243,11 +278,11 @@
                             </div>
                         </div>
                         <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
-                            <img src="assets/imgs/banner/banner-11.jpg" alt="">
+                            <img src="{{ asset('assets/imgs/banner/banner-11.jpg') }}" alt="">
                             <div class="banner-text">
                                 <span>Women Zone</span>
                                 <h4>Save 17% on <br>Office Dress</h4>
-                                <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                                <a href="{{ route('shop') }}">Shop Now <i class="fi-rs-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -261,16 +296,16 @@
     <script>
         var sliderrange = $('#slider-range');
         var amountprice = $('#amount');
-        $(function() {
+        $(function () {
             sliderrange.slider({
                 range: true,
                 min: 0,
                 max: 1000,
                 values: [0, 1000],
-                slide: function(event, ui) {
+                slide: function (event, ui) {
                     // amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
-                    @this.set('min_value', ui.values[0])
-                    @this.set('max_value', ui.values[1])
+                @this.set('min_value', ui.values[0])
+                @this.set('max_value', ui.values[1])
                 }
             });
         });
