@@ -83,8 +83,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <label for="sku" class="form-label" wire:model="stock_status">Наличие</label>
-                                        <select class="form-control">
+                                        <label for="sku" class="form-label" >Наличие</label>
+                                        <select class="form-control" wire:model="stock_status">
                                             <option value="instock">InStock</option>
                                             <option value="outofstock">Out ot Stock</option>
                                         </select>
@@ -93,8 +93,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <label for="featured" class="form-label" wire:model="featured">Рекомендуемые</label>
-                                        <select class="form-control" name="featured">
+                                        <label for="featured" class="form-label" >Рекомендуемые</label>
+                                        <select class="form-control" name="featured" wire:model="featured">
                                             <option value="0">No</option>
                                             <option value="1">Yes</option>
                                         </select>
