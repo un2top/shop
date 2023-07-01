@@ -12,6 +12,7 @@ class AdminCategoriesComponent extends Component
     public $category_id;
     public function deleteCategory(){
         $category = Category::find($this->category_id);
+        unlink('assets/imgs/categories/' . $category->image);
         $category->delete();
         session()->flash('message', 'Категория была удалена');
     }

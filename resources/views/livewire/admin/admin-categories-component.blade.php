@@ -36,8 +36,10 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Изображение</th>
                                         <th>Имя</th>
                                         <th>Путь</th>
+                                        <th>Популярное</th>
                                         <th>Действие</th>
                                     </tr>
                                     </thead>
@@ -48,8 +50,10 @@
                                     @foreach($categories as $category)
                                         <tr>
                                             <td>{{++$i}}</td>
+                                            <td><img src="{{ asset('assets/imgs/categories') }}/{{ $category->image }}" width="60"></td>
                                             <td>{{$category->name}}</td>
-                                            <td>{{$category->slug}}</td>
+                                            <td>{{$category->name}}</td>
+                                            <td>{{$category->is_popular == 1 ? 'Yes' : 'No'}}</td>
                                             <td>
                                                 <a href="{{ route('admin.category.edit', $category->id) }}" class="text-info">Редактировать</a>
                                                 <a href="#" class="text-danger" onclick="deleteConfirmation({{$category->id}})" style="margin-left:20px">Удалить</a>
