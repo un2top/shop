@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -8,12 +8,13 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use function session;
+use function view;
 
-class AdminEditProductComponent extends Component
+class AdminAddProductComponent extends Component
 {
     use WithFileUploads;
 
-    public $product_id;
     public $name;
     public $slug;
     public $sort_description;
@@ -26,48 +27,29 @@ class AdminEditProductComponent extends Component
     public $quantity;
     public $image;
     public $category_id;
-    public $newimage;
-
-    public function mount($product_id)
-    {
-        $product = Product::find($product_id);
-        $this->product_id = $product->id;
-        $this->name = $product->name;
-        $this->slug = $product->slug;
-        $this->sort_description = $product->sort_description;
-        $this->description = $product->description;
-        $this->regular_price = $product->regular_price;
-        $this->sale_price = $product->sale_price;
-        $this->sku = $product->SKU;
-        $this->stock_status = $product->stock_status;
-        $this->featured = $product->featured;
-        $this->quantity = $product->quantity;
-        $this->image = $product->image;
-        $this->category_id = $product->category_id;
-    }
 
     public function generateSlug()
     {
         $this->slug = Str::slug($this->name);
     }
 
-    public function updateProduct()
+    public function addProduct()
     {
         $this->validate([
             'name' => 'required',
             'slug' => 'required',
             'sort_description' => 'required',
             'description' => 'required',
-            'regular_price' => 'required',
-            'sale_price' => 'required',
+            'regular_price' => 'required|integer',
+            'sale_price' => 'required|integer',
             'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
-            'quantity' => 'required',
+            'quantity' => 'required|integer',
             'image' => 'required',
             'category_id' => 'required',
         ]);
-        $product = Product::find($this->product_id);
+        $product = new Product();
         $product->name = $this->name;
         $product->slug = $this->slug;
         $product->sort_description = $this->sort_description;
@@ -78,21 +60,17 @@ class AdminEditProductComponent extends Component
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;
-        if ($this->newimage)
-        {
-            unlink('assets/imgs/products/' . $product->image);
-            $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
-            $this->newimage->storeAs('products', $imageName);
-            $product->image = $imageName;
-        }
+        $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
+        $this->image->storeAs('products', $imageName);
+        $product->image = $imageName;
         $product->category_id = $this->category_id;
         $product->save();
-        session()->flash('message', 'Товар обнавлен');
+        session()->flash('message', 'Товар добавлен');
     }
 
     public function render()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('livewire.admin.admin-edit-product-component', compact('categories'));
+        return view('livewire.admin.product.admin-add-product-component', compact('categories'));
     }
 }

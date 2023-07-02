@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Category;
 
 use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
+use function session;
+use function view;
 
 class AdminCategoriesComponent extends Component
 {
@@ -19,6 +21,6 @@ class AdminCategoriesComponent extends Component
     public function render()
     {
         $categories = Category::orderBy('name','ASC')->paginate(5);
-        return view('livewire.admin.admin-categories-component', compact('categories'));
+        return view('livewire.admin.category.admin-categories-component', compact('categories'));
     }
 }

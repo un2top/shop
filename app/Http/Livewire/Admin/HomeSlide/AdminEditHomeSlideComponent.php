@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\HomeSlide;
 
 use App\Models\HomeSlider;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use function session;
+use function view;
 
 class AdminEditHomeSlideComponent extends Component
 {
@@ -62,6 +64,6 @@ class AdminEditHomeSlideComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-edit-home-slide-component');
+        return view('livewire.admin.homeslide.admin-edit-home-slide-component');
     }
 }

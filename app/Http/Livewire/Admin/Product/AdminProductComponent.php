@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
+use function session;
+use function view;
 
 class AdminProductComponent extends Component
 {
@@ -20,6 +22,6 @@ class AdminProductComponent extends Component
     public function render()
     {
         $products = Product::orderBy('created_at', 'DESC')->paginate(10);
-        return view('livewire.admin.admin-product-component', compact('products'));
+        return view('livewire.admin.product.admin-product-component', compact('products'));
     }
 }

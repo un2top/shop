@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\HomeSlide;
 
 use App\Models\HomeSlider;
 use Livewire\Component;
+use function session;
+use function view;
 
 class AdminHomeSliderComponent extends Component
 {
@@ -18,6 +20,6 @@ class AdminHomeSliderComponent extends Component
     public function render()
     {
         $slides = HomeSlider::orderBy('created_at', 'DESC')->get();
-        return view('livewire.admin.admin-home-slider-component', compact('slides'));
+        return view('livewire.admin.homeslide.admin-home-slider-component', compact('slides'));
     }
 }

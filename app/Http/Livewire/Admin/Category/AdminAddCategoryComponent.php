@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Category;
 
 use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use function session;
+use function view;
 
 class AdminAddCategoryComponent extends Component
 {
@@ -51,6 +53,6 @@ class AdminAddCategoryComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-add-category-component');
+        return view('livewire.admin.category.admin-add-category-component');
     }
 }

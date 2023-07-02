@@ -1,26 +1,26 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\Admin\AdminAddCategoryComponent;
-use App\Http\Livewire\Admin\AdminAddHomeSlideComponent;
-use App\Http\Livewire\Admin\AdminAddProductComponent;
-use App\Http\Livewire\Admin\AdminCategoriesComponent;
+use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Admin\AdminEditCategoryComponent;
-use App\Http\Livewire\Admin\AdminEditHomeSlideComponent;
-use App\Http\Livewire\Admin\AdminEditProductComponent;
-use App\Http\Livewire\Admin\AdminHomeSliderComponent;
-use App\Http\Livewire\Admin\AdminProductComponent;
+use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
+use App\Http\Livewire\Admin\Category\AdminCategoriesComponent;
+use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
+use App\Http\Livewire\Admin\HomeSlide\AdminAddHomeSlideComponent;
+use App\Http\Livewire\Admin\HomeSlide\AdminEditHomeSlideComponent;
+use App\Http\Livewire\Admin\HomeSlide\AdminHomeSliderComponent;
+use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
+use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
+use App\Http\Livewire\Admin\Product\AdminProductComponent;
+use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\DetailsComponent;
+use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\SearchComponent;
+use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\WishListComponent;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\CartComponent;
-use App\Http\Livewire\CheckoutComponent;
-use App\Http\Livewire\HomeComponent;
-use App\Http\Livewire\ShopComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +35,7 @@ use App\Http\Livewire\ShopComponent;
 
 Route::get('/', HomeComponent::class)->name('home.index');
 Route::get('/shop', ShopComponent::class)->name('shop');
+Route::get('/about', AboutComponent::class)->name('about');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/cart', CartComponent::class)->name('shop.cart');
 Route::get('/wishlist', WishListComponent::class)->name('shop.wishlist');
