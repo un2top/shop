@@ -17,6 +17,7 @@ class ShopComponent extends Component
     public $orderBy = 'По умолчанию';
     public $min_value = 0;
     public $max_value = 1000;
+    protected $paginationTheme = 'bootstrap';
 
     public function store($product_id, $product_name, $product_price)
     {

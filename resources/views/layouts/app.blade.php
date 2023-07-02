@@ -23,12 +23,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-3 col-lg-4">
-                    <div class="header-info">
-                        <ul>
-                            <li>
-                                <a  href="#"> <i class="fi-rs-world"></i> Pусский </a>
-                            </li>
-                        </ul>
+                    <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                        <a href="http://twitter.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a>
+                        <a href="https://instagram.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
+                        <a href="https://www.pinterest.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
+                        <a href="https://www.youtube.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-4">
