@@ -52,7 +52,7 @@
                                             <td>{{++$i}}</td>
                                             <td><img src="{{ asset('assets/imgs/categories') }}/{{ $category->image }}" width="60"></td>
                                             <td>{{$category->name}}</td>
-                                            <td>{{$category->name}}</td>
+                                            <td>{{$category->slug}}</td>
                                             <td>{{$category->is_popular == 1 ? 'Yes' : 'No'}}</td>
                                             <td>
                                                 <a href="{{ route('admin.category.edit', $category->id) }}" class="text-info">Редактировать</a>
@@ -62,7 +62,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{$categories->links()}}
+                                    <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                                        {{ $categories->links() }}
+                                    </div>
                             </div>
                         </div>
                     </div>

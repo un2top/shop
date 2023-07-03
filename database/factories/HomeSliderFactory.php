@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\odel=Product>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\odel=HomeSlider>
  */
-class ProductFactory extends Factory
+class HomeSliderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,11 +17,8 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $productName = $this->faker->unique()->text(30);
+        $productName = $this->faker->unique()->words(4, true);
         $slug = Str::slug($productName, '-');
-        if ($this->faker->boolean(70)) {
-            $featured = 1;
-        }
         return [
             'name' => $productName,
             'slug' => $slug,
@@ -32,8 +29,7 @@ class ProductFactory extends Factory
             'stock_status' => 'instock',
             'quantity' => $this->faker->numberBetween(10, 50),
             'image' => 'product-' . $this->faker->numberBetween(1, 16) . '.jpg',
-            'category_id' => $this->faker->numberBetween(1, 5),
-            'featured'=>$this->faker->boolean(70),
+            'category_id' => $this->faker->numberBetween(1, 5)
 
         ];
     }

@@ -12,6 +12,7 @@ class AdminCategoriesComponent extends Component
 {
     use WithPagination;
     public $category_id;
+    protected $paginationTheme = 'bootstrap';
     public function deleteCategory(){
         $category = Category::find($this->category_id);
         unlink('assets/imgs/categories/' . $category->image);

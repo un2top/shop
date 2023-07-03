@@ -17,14 +17,18 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $categories = ['Блузки и рубашки','Брюки', 'Верхняя одежда', 'Джемперы', 'Водолазки и кардиганы', 'Джинсы',
-            'Комбинезоны', 'Костюмы', 'Лонгсливы', 'Пиджаки', 'Жилеты и жакеты',];
+        $categoryName = $this->faker->unique()->randomElement(['Блузки и рубашки', 'Брюки', 'Верхняя одежда', 'Джемперы', 'Водолазки и кардиганы', 'Джинсы',
+            'Комбинезоны', 'Костюмы', 'Лонгсливы', 'Пиджаки', 'Жилеты и жакеты',]);
 
-        $categoryName = $this->faker->unique()->words(2, true);
-        $slug = Str::slug($categoryName,'-');
+//        $categoryName = $this->faker->unique()->words(2, true);
+        $slug = Str::slug($categoryName, '-');
+
+
         return [
             'name' => $categoryName,
-            'slug'=> $slug,
+            'slug' => $slug,
+            'image' => $this->faker->unique()->numberBetween(1, 11) . '.jpg',
+            'is_popular' => $this->faker->boolean(70)
         ];
     }
 }
