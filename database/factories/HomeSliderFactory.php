@@ -17,19 +17,18 @@ class HomeSliderFactory extends Factory
      */
     public function definition()
     {
-        $productName = $this->faker->unique()->words(4, true);
-        $slug = Str::slug($productName, '-');
+        $topTitle = $this->faker->unique()->randomElement(['Горячие акции', 'Выгодные предложения']);
+        $title = $this->faker->unique()->randomElement(['Модные тренды', 'Специальные цены']);
+        $subTitle = $this->faker->unique()->randomElement(['Новые коллекции', 'Топовые бренды']);
+        $offer = $this->faker->unique()->randomElement(['Скидки на зимние вещи', 'Добавляйте нас в соц. сетях']);
         return [
-            'name' => $productName,
-            'slug' => $slug,
-            'sort_description' => $this->faker->text(200),
-            'description' => $this->faker->text(500),
-            'regular_price' => $this->faker->numberBetween(10, 500),
-            'SKU' => 'PRD' . $this->faker->unique()->numberBetween(100, 500),
-            'stock_status' => 'instock',
-            'quantity' => $this->faker->numberBetween(10, 50),
-            'image' => 'product-' . $this->faker->numberBetween(1, 16) . '.jpg',
-            'category_id' => $this->faker->numberBetween(1, 5)
+            'top_title' => $topTitle,
+            'title' => $title,
+            'sub_title' => $subTitle,
+            'offer' => $offer,
+            'link' => 'http://127.0.0.1:8000/shop',
+            'status' => 1,
+            'image' => $this->faker->numberBetween(1, 2) . '.jpg',
 
         ];
     }

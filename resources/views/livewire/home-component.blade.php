@@ -96,7 +96,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('product.details', ['slug'=>$fproduct->slug]) }}">
-                                                <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $fproduct->image }}" alt="">
+                                                <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $fproduct->image }}" alt="" height="280" width="280">
                                             </a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
@@ -182,7 +182,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">
-                                                <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="">
+                                                <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="" height="280" width="280">
                                             </a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
@@ -295,7 +295,7 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">
-                                        <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="">
+                                        <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="" height="194" width="194">
                                     </a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
