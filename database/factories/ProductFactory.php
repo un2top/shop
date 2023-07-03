@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $productName = $this->faker->unique()->words(6, true);
+        $productName = $this->faker->unique()->words(4, true);
         $slug = Str::slug($productName, '-');
         return [
             'name' => $productName,
