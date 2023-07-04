@@ -30,7 +30,6 @@ class ShopComponent extends Component
     public function changeOrderBy($order)
     {
         $this->orderBy = $order;
-
     }
 
     public function changePageSize($size)

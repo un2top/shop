@@ -25,6 +25,12 @@ class AdminAddProductComponent extends Component
     public $stock_status = 'instock';
     public $featured = 0;
     public $quantity;
+    public $appointment;
+    public $composition;
+    public $features;
+    public $taking_care;
+    public $landing;
+    public $drawing;
     public $image;
     public $category_id;
 
@@ -43,6 +49,12 @@ class AdminAddProductComponent extends Component
             'regular_price' => 'required|integer',
             'sale_price' => 'required|integer',
             'sku' => 'required',
+            'appointment' => 'required',
+            'composition' => 'required',
+            'features' => 'required',
+            'taking_care' => 'required',
+            'landing' => 'required',
+            'drawing' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required|integer',
@@ -57,6 +69,12 @@ class AdminAddProductComponent extends Component
         $product->regular_price = $this->regular_price;
         $product->sale_price = $this->sale_price;
         $product->SKU = $this->sku;
+        $product->appointment = $this->appointment;
+        $product->composition = $this->composition;
+        $product->features = $this->features;
+        $product->taking_care = $this->taking_care;
+        $product->landing = $this->landing;
+        $product->drawing = $this->drawing;
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;

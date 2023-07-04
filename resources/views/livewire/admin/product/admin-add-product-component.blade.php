@@ -83,6 +83,48 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
+                                        <label for="sku" class="form-label">Назначение</label>
+                                        <input type="text" name="appointment" class="form-control" placeholder="Назначение" wire:model="appointment">
+                                        @error('appointment')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="sku" class="form-label">Состав</label>
+                                        <input type="text" name="composition" class="form-control" placeholder="Состав" wire:model="composition">
+                                        @error('composition')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="sku" class="form-label">Особенности модели</label>
+                                        <input type="text" name="features" class="form-control" placeholder="Особенности модели" wire:model="features">
+                                        @error('features')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="sku" class="form-label">Тип посадки</label>
+                                        <input type="text" name="landing" class="form-control" placeholder="Тип посадки" wire:model="landing">
+                                        @error('landing')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="sku" class="form-label">Рисунок</label>
+                                        <input type="text" name="drawing" class="form-control" placeholder="Рисунок" wire:model="drawing">
+                                        @error('drawing')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="sku" class="form-label">Уход за вещами</label>
+                                        <input type="text" name="taking_care" class="form-control" placeholder="Уход за вещами" wire:model="taking_care">
+                                        @error('taking_care')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 mt-3">
                                         <label for="sku" class="form-label" >Наличие</label>
                                         <select class="form-control" wire:model="stock_status">
                                             <option value="instock">InStock</option>

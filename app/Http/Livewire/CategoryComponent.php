@@ -16,6 +16,7 @@ class CategoryComponent extends Component
     public $pageSize = 12;
     public $orderBy = 'По умолчанию';
     public $slug;
+
     protected $paginationTheme = 'bootstrap';
 
     public function store($product_id, $product_name, $product_price)

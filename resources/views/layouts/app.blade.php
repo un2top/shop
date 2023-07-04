@@ -328,7 +328,7 @@
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                         <nav>
                             <ul>
-                                <li><a class="active" href="/">Главная</a></li>
+                                <li><a  href="/">Главная</a></li>
                                 <li><a href="{{ route('about') }}">О нас</a></li>
                                 <li><a href="{{ route('shop') }}">Товары</a></li>
                                 <li><a href="blog.html">Blog </a></li>

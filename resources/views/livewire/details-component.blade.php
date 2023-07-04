@@ -1,11 +1,29 @@
 <div>
+    <style>
+        nav svg {
+            height: 20px;
+        }
+
+        nav .hidden {
+            display: block;
+        }
+
+        .wishlisted {
+            background-color: #F15412 !important;
+            border: 1px solid transparent !important;
+        }
+
+        .wishlisted i{
+            color: #fff !important;
+        }
+    </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Home</a>
-                    <span></span> Fashion
-                    <span></span> Abstract Print Patchwork Dress
+                    <a href="/" rel="nofollow">Главная</a>
+                    <span></span> {{ $product->category->name }}
+                    <span></span> {{ $product->name }}
                 </div>
             </div>
         </div>
@@ -24,81 +42,37 @@
                                                 <img src="{{ asset('assets/imgs/products')}}/{{ $product->image }}"
                                                      alt="product image">
                                             </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-1.jpg') }}"
-                                                     alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-3.jpg') }}"
-                                                     alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-4.jpg') }}"
-                                                     alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-5.jpg') }}"
-                                                     alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-6.jpg') }}"
-                                                     alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-7.jpg') }}"
-                                                     alt="product image">
-                                            </figure>
                                         </div>
                                         <!-- THUMBNAILS -->
-                                        <div class="slider-nav-thumbnails pl-15 pr-15">
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}"
-                                                      alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}"
-                                                      alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-5.jpg') }}"
-                                                      alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-6.jpg') }}"
-                                                      alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-7.jpg') }}"
-                                                      alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-8.jpg') }}"
-                                                      alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-9.jpg') }}"
-                                                      alt="product image"></div>
-                                        </div>
                                     </div>
                                     <!-- End Gallery -->
                                     <div class="social-icons single-share">
                                         <ul class="text-grey-5 d-inline-block">
                                             <li><strong class="mr-10">Share this:</strong></li>
-                                            <li class="social-facebook"><a href="#"><img
-                                                        src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}"
-                                                        alt=""></a></li>
-                                            <li class="social-twitter"><a href="#"><img
-                                                        src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}"
-                                                        alt=""></a></li>
-                                            <li class="social-instagram"><a href="#"><img
-                                                        src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}"
-                                                        alt=""></a></li>
-                                            <li class="social-linkedin"><a href="#"><img
-                                                        src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}"
-                                                        alt=""></a></li>
+                                            <li class="social-facebook">
+                                                <a href="http://twitter.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a>
+                                            </li>
+                                            <li class="social-twitter">
+                                                <a href="https://instagram.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
+                                            </li>
+                                            <li class="social-instagram">
+                                                <a href="https://www.pinterest.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
+                                            </li>
+                                            <li class="social-linkedin">
+                                                <a href="https://www.youtube.com/"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}" alt=""></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
+                                    @php
+                                        $witems = Cart::instance('wishlist')->content()->pluck('id');
+                                    @endphp
                                     <div class="detail-info">
                                         <h2 class="title-detail">{{ $product->name }}</h2>
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
-                                                <span> Brands: <a href="shop.html">Bootstrap</a></span>
-                                            </div>
-                                            <div class="product-rate-cover text-end">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
-                                                    </div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                                <span> Brands: <a href="{{ route('product.category', ['slug'=>$product->category->slug]) }}">{{ $product->category->name }}</a></span>
                                             </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
@@ -113,67 +87,27 @@
                                         <div class="short-desc mb-30">
                                             <p>{{ $product->sort_description }}</p>
                                         </div>
-                                        {{--                                        <div class="product_sort_info font-xs mb-30">--}}
-                                        {{--                                            <ul>--}}
-                                        {{--                                                <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>--}}
-                                        {{--                                                <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 30 Day Return Policy</li>--}}
-                                        {{--                                                <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>--}}
-                                        {{--                                            </ul>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="attr-detail attr-color mb-15">
-                                            <strong class="mr-10">Color</strong>
-                                            <ul class="list-filter color-filter">
-                                                <li><a href="#" data-color="Red"><span class="product-color-red"></span></a>
-                                                </li>
-                                                <li><a href="#" data-color="Yellow"><span
-                                                            class="product-color-yellow"></span></a></li>
-                                                <li class="active"><a href="#" data-color="White"><span
-                                                            class="product-color-white"></span></a></li>
-                                                <li><a href="#" data-color="Orange"><span
-                                                            class="product-color-orange"></span></a></li>
-                                                <li><a href="#" data-color="Cyan"><span
-                                                            class="product-color-cyan"></span></a></li>
-                                                <li><a href="#" data-color="Green"><span
-                                                            class="product-color-green"></span></a></li>
-                                                <li><a href="#" data-color="Purple"><span
-                                                            class="product-color-purple"></span></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="attr-detail attr-size">
-                                            <strong class="mr-10">Size</strong>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">S</a></li>
-                                                <li class="active"><a href="#">M</a></li>
-                                                <li><a href="#">L</a></li>
-                                                <li><a href="#">XL</a></li>
-                                                <li><a href="#">XXL</a></li>
-                                            </ul>
-                                        </div>
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
                                             <div class="product-extra-link2">
-                                                <button type="button" class="button button-add-to-cart"
-                                                        wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">
-                                                    Add to cart
-                                                </button>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                   href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up"
-                                                   href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                                <div class="product-action-1 show">
+                                                    @if($witems->contains($product->id))
+                                                        <a aria-label="Remove From Wishlist" class="action-btn hover-up wishlisted"
+                                                           href="#" wire:click.prevent="removeFromWishList({{ $product->id }})"><i class="fi-rs-heart"></i></a>
+                                                    @else
+                                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWitchList({{ $product->id }}, '{{$product->name}}', {{ $product->regular_price }})">
+                                                            <i class="fi-rs-heart"></i></a>
+                                                    @endif
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="#"
+                                                       wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i
+                                                            class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                         <ul class="product-meta font-xs color-grey mt-50">
-                                            <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                            <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#"
-                                                                                                       rel="tag">Women</a>,
-                                                <a href="#" rel="tag">Dress</a></li>
-                                            <li>Availability:<span
-                                                    class="in-stock text-success ml-5">8 Items In Stock</span></li>
+                                            <li class="mb-5">SKU: {{ $product->SKU }}</li>
+                                            <li>В наличии:<span
+                                                    class="in-stock text-success ml-5"> {{ $product->quantity }} шт.</span></li>
                                         </ul>
                                     </div>
                                     <!-- Detail Info -->
@@ -198,117 +132,45 @@
                                     <div class="tab-pane fade show active" id="Description">
                                         <div class="">
                                             {{ $product->description }}
-                                            {{--                                            <p>Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop--}}
-                                            {{--                                                tightly neurotic hungrily some and dear furiously this apart.</p>--}}
-                                            {{--                                            <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped--}}
-                                            {{--                                                besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.--}}
-                                            {{--                                            </p>--}}
-                                            {{--                                            <ul class="product-more-infor mt-30">--}}
-                                            {{--                                                <li><span>Type Of Packing</span> Bottle</li>--}}
-                                            {{--                                                <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>--}}
-                                            {{--                                                <li><span>Quantity Per Case</span> 100ml</li>--}}
-                                            {{--                                                <li><span>Ethyl Alcohol</span> 70%</li>--}}
-                                            {{--                                                <li><span>Piece In One</span> Carton</li>--}}
-                                            {{--                                            </ul>--}}
-                                            {{--                                            <hr class="wp-block-separator is-style-dots">--}}
-                                            {{--                                            <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward--}}
-                                            {{--                                                energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective limpet.</p>--}}
-                                            {{--                                            <h4 class="mt-30">Packaging & Delivery</h4>--}}
-                                            {{--                                            <hr class="wp-block-separator is-style-wide">--}}
-                                            {{--                                            <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane--}}
-                                            {{--                                                went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.--}}
-                                            {{--                                            </p>--}}
-                                            {{--                                            <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian--}}
-                                            {{--                                                in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively--}}
-                                            {{--                                                dachshund.--}}
-                                            {{--                                            </p>--}}
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="Additional-info">
                                         <table class="font-md">
                                             <tbody>
-                                            <tr class="stand-up">
-                                                <th>Stand Up</th>
+                                            <tr>
+                                                <td>Назначение</td>
                                                 <td>
-                                                    <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
+                                                    <p>{{ $product->appointment }}</p>
                                                 </td>
                                             </tr>
-                                            <tr class="folded-wo-wheels">
-                                                <th>Folded (w/o wheels)</th>
+                                            <tr>
+                                                <td>Состав</td>
                                                 <td>
-                                                    <p>32.5″L x 18.5″W x 16.5″H</p>
+                                                    <p>{{ $product->composition }}</p>
                                                 </td>
                                             </tr>
-                                            <tr class="folded-w-wheels">
-                                                <th>Folded (w/ wheels)</th>
+                                            <tr>
+                                                <td>Особенности модели</td>
                                                 <td>
-                                                    <p>32.5″L x 24″W x 18.5″H</p>
+                                                    <p>{{ $product->features }}</p>
                                                 </td>
                                             </tr>
-                                            <tr class="door-pass-through">
-                                                <th>Door Pass Through</th>
+                                            <tr>
+                                                <td>Уход за вещами</td>
                                                 <td>
-                                                    <p>24</p>
+                                                    <p>{{ $product->taking_care }}</p>
                                                 </td>
                                             </tr>
-                                            <tr class="frame">
-                                                <th>Frame</th>
+                                            <tr>
+                                                <td>Тип посадки</td>
                                                 <td>
-                                                    <p>Aluminum</p>
+                                                    <p>{{ $product->landing }}</p>
                                                 </td>
                                             </tr>
-                                            <tr class="weight-wo-wheels">
-                                                <th>Weight (w/o wheels)</th>
+                                            <tr>
+                                                <td>Рисунок</td>
                                                 <td>
-                                                    <p>20 LBS</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="weight-capacity">
-                                                <th>Weight Capacity</th>
-                                                <td>
-                                                    <p>60 LBS</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="width">
-                                                <th>Width</th>
-                                                <td>
-                                                    <p>24″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="handle-height-ground-to-handle">
-                                                <th>Handle height (ground to handle)</th>
-                                                <td>
-                                                    <p>37-45″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="wheels">
-                                                <th>Wheels</th>
-                                                <td>
-                                                    <p>12″ air / wide track slick tread</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="seat-back-height">
-                                                <th>Seat back height</th>
-                                                <td>
-                                                    <p>21.5″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="head-room-inside-canopy">
-                                                <th>Head room (inside canopy)</th>
-                                                <td>
-                                                    <p>25″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="pa_color">
-                                                <th>Color</th>
-                                                <td>
-                                                    <p>Black, Blue, Red, White</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="pa_size">
-                                                <th>Size</th>
-                                                <td>
-                                                    <p>M, S</p>
+                                                    <p>{{ $product->drawing }}</p>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -500,11 +362,11 @@
                             </div>
                             <div class="row mt-60">
                                 <div class="col-12">
-                                    <h3 class="section-title style-1 mb-30">Related products</h3>
+                                    <h3 class="section-title style-1 mb-30">Похожие товары</h3>
                                 </div>
                                 <div class="col-12">
                                     <div class="row related-products">
-                                        @foreach($rproducts as $rproduct)
+                                        @foreach($relatedProducts as $rproduct)
                                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                                 <div class="product-cart-wrap small hover-up">
                                                     <div class="product-img-action-wrap">
@@ -512,24 +374,9 @@
                                                             <a href="{{ route('product.details', ['slug'=>$rproduct->slug]) }}"
                                                                tabindex="0">
                                                                 <img class="default-img"
-                                                                     src="{{ asset('assets/imgs/shop/product-') }}{{ $rproduct->id }}-1.jpg"
+                                                                     src="{{ asset('assets/imgs/products') }}/{{ $rproduct->image }}"
                                                                      alt="{{ $rproduct->name }}">
-                                                                <img class="hover-img"
-                                                                     src="{{ asset('assets/imgs/shop/product-2-2.jpg') }}"
-                                                                     alt="">
                                                             </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#quickViewModal"><i
-                                                                    class="fi-rs-search"></i></a>
-                                                            <a aria-label="Add To Wishlist"
-                                                               class="action-btn small hover-up" href="wishlist.php"
-                                                               tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label="Compare" class="action-btn small hover-up"
-                                                               href="compare.php" tabindex="0"><i
-                                                                    class="fi-rs-shuffle"></i></a>
                                                         </div>
                                                         <div
                                                             class="product-badges product-badges-position product-badges-mrg">
@@ -559,96 +406,14 @@
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
                         <div class="widget-category mb-30">
-                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Категории</h5>
                             <ul class="categories">
-                                <li><a href="shop.html">Shoes & Bags</a></li>
-                                <li><a href="shop.html">Blouses & Shirts</a></li>
-                                <li><a href="shop.html">Dresses</a></li>
-                                <li><a href="shop.html">Swimwear</a></li>
-                                <li><a href="shop.html">Beauty</a></li>
-                                <li><a href="shop.html">Jewelry & Watch</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
+                                @foreach($categories as $category)
+                                    <li>
+                                        <a href="{{ route('product.category', ['slug'=>$category->slug]) }}">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
-                        </div>
-                        <!-- Fillter By Price -->
-                        <div class="sidebar-widget price_range range mb-30">
-                            <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">Fill by price</h5>
-                                <div class="bt-1 border-color-1"></div>
-                            </div>
-                            <div class="price-filter">
-                                <div class="price-filter-inner">
-                                    <div id="slider-range"></div>
-                                    <div class="price_slider_amount">
-                                        <div class="label-input">
-                                            <span>Range:</span><input type="text" id="amount" name="price"
-                                                                      placeholder="Add Your Price">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group">
-                                <div class="list-group-item mb-10 mt-10">
-                                    <label class="fw-900">Color</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                               id="exampleCheckbox1" value="">
-                                        <label class="form-check-label"
-                                               for="exampleCheckbox1"><span>Red (56)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                               id="exampleCheckbox2" value="">
-                                        <label class="form-check-label"
-                                               for="exampleCheckbox2"><span>Green (78)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                               id="exampleCheckbox3" value="">
-                                        <label class="form-check-label"
-                                               for="exampleCheckbox3"><span>Blue (54)</span></label>
-                                    </div>
-                                    <label class="fw-900 mt-15">Item Condition</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                               id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                               id="exampleCheckbox21" value="">
-                                        <label class="form-check-label"
-                                               for="exampleCheckbox21"><span>Refurbished (27)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                               id="exampleCheckbox31" value="">
-                                        <label class="form-check-label"
-                                               for="exampleCheckbox31"><span>Used (45)</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
-                        </div>
-                        <!-- Product sidebar Widget -->
-                        <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
-                            <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">New products</h5>
-                                <div class="bt-1 border-color-1"></div>
-                            </div>
-                            @foreach($nproducts as $nproduct)
-                                <div class="single-post clearfix">
-                                    <div class="image">
-                                        <img src="{{ asset('assets/imgs/shop/thumbnail-')}}{{ $nproduct->id }}.jpg"
-                                             alt="{{ $nproduct->name }}">
-                                    </div>
-                                    <div class="content pt-10">
-                                        <h5>
-                                            <a href="{{ route('product.details', ['slug'=>$nproduct->slug]) }}">{{ $nproduct->name }}</a>
-                                        </h5>
-                                        <p class="price mb-0 mt-5">${{ $nproduct->regular_price }}</p>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:90%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>

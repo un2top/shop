@@ -23,6 +23,12 @@ class AdminEditProductComponent extends Component
     public $regular_price;
     public $sale_price;
     public $sku;
+    public $appointment;
+    public $composition;
+    public $features;
+    public $taking_care;
+    public $landing;
+    public $drawing;
     public $stock_status = 'instock';
     public $featured = 0;
     public $quantity;
@@ -40,6 +46,12 @@ class AdminEditProductComponent extends Component
         $this->description = $product->description;
         $this->regular_price = $product->regular_price;
         $this->sale_price = $product->sale_price;
+        $this->appointment = $product->appointment;
+        $this->composition = $product->composition;
+        $this->features = $product->features;
+        $this->taking_care = $product->taking_care;
+        $this->landing = $product->landing;
+        $this->drawing = $product->drawing;
         $this->sku = $product->SKU;
         $this->stock_status = $product->stock_status;
         $this->featured = $product->featured;
@@ -60,9 +72,15 @@ class AdminEditProductComponent extends Component
             'slug' => 'required',
             'sort_description' => 'required',
             'description' => 'required',
-            'regular_price' => 'required|integer',
-            'sale_price' => 'required|integer',
+            'regular_price' => 'required',
+            'sale_price' => 'required',
             'sku' => 'required',
+            'appointment' => 'required',
+            'composition' => 'required',
+            'features' => 'required',
+            'taking_care' => 'required',
+            'landing' => 'required',
+            'drawing' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required|integer',
@@ -76,10 +94,17 @@ class AdminEditProductComponent extends Component
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
         $product->sale_price = $this->sale_price;
+        $product->appointment = $this->appointment;
+        $product->composition = $this->composition;
+        $product->features = $this->features;
+        $product->taking_care = $this->taking_care;
+        $product->landing = $this->landing;
+        $product->drawing = $this->drawing;
         $product->SKU = $this->sku;
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;
+
         if ($this->newimage)
         {
             unlink('assets/imgs/products/' . $product->image);
