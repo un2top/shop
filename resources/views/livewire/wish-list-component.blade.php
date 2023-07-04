@@ -39,42 +39,43 @@
                                     <div class="product-img product-img-zoom">
                                         <a href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">
                                             <img class="default-img"
-                                                 src="{{ asset('assets/imgs/shop/product-')}}{{ $item->model->id }}-1.jpg"
-                                                 alt="{{ $item->model->name }}">
-                                            <img class="hover-img"
-                                                 src="{{ asset('assets/imgs/shop/product-')}}{{ $item->model->id }}-2.jpg"
+                                                 src="{{ asset('assets/imgs/products')}}/{{ $item->model->image }}"
                                                  alt="{{ $item->model->name }}">
                                         </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Quick view" class="action-btn hover-up"
-                                           data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                            <i class="fi-rs-search"></i></a>
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                           href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up"
-                                           href="compare.php"><i class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="hot">Hot</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop.html">Music</a>
+                                        <a href="{{ route('product.category', ['slug'=>$item->model->category->slug]) }}">{{ $item->model->category->name }}</a>
                                     </div>
-                                    <h2><a href="product-details.html">{{ $item->model->name }}</a></h2>
-                                    <div class="rating-result" title="90%">
+                                    <h2><a href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">{{ $item->model->name }}</a></h2>
+                                    <div>
+                                        @if($item->model->sale !==0)
                                             <span>
-                                                <span>90%</span>
+                                                <span>Скидка {{ $item->model->sale }}%</span>
                                             </span>
+                                        @else
+                                            <span>
+                                                <span>Выгодная цена</span>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="product-price">
-                                        <span>$ {{ $item->model->regular_price }} </span>
-                                        {{--<span class="old-price">$245.8</span>--}}
+                                        @if($item->model->sale !==0)
+                                            <span>
+                                                ${{ $item->model->sale_price }}
+                                            </span>
+                                            <span class="old-price">
+                                                ${{ $item->model->regular_price }}
+                                            </span>
+                                        @else
+                                            <span>
+                                                ${{ $item->model->regular_price }}
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="product-action-1 show">
-                                            <a aria-label="Remove From Wishlist" class="action-btn hover-up wishlisted"
+                                            <a aria-label="Убрать из избранного" class="action-btn hover-up wishlisted"
                                                href="#" wire:click.prevent="removeFromWishList({{ $item->model->id }})"><i class="fi-rs-heart"></i></a>
 {{--                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="#"--}}
 {{--                                           wire:click.prevent="store({{ $item->model->id }}, '{{ $item->model->name }}', {{ $item->model->regular_price }})"><i--}}

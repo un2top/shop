@@ -24,7 +24,6 @@ class ShopComponent extends Component
         Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\Product');
         session()->flash('success_message', 'Товар добавлен в корзину');
         $this->emitTo('cart-icon-component', 'refreshComponent');
-        return redirect()->route('shop.cart');
     }
 
     public function changeOrderBy($order)

@@ -20,7 +20,7 @@ class AdminAddProductComponent extends Component
     public $sort_description;
     public $description;
     public $regular_price;
-    public $sale_price;
+    public $sale;
     public $sku;
     public $stock_status = 'instock';
     public $featured = 0;
@@ -47,7 +47,7 @@ class AdminAddProductComponent extends Component
             'sort_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|integer',
-            'sale_price' => 'required|integer',
+            'sale' => 'required|integer',
             'sku' => 'required',
             'appointment' => 'required',
             'composition' => 'required',
@@ -67,7 +67,7 @@ class AdminAddProductComponent extends Component
         $product->sort_description = $this->sort_description;
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
-        $product->sale_price = $this->sale_price;
+        $product->sale = $this->sale;
         $product->SKU = $this->sku;
         $product->appointment = $this->appointment;
         $product->composition = $this->composition;

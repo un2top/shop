@@ -45,7 +45,7 @@ class AdminEditProductComponent extends Component
         $this->sort_description = $product->sort_description;
         $this->description = $product->description;
         $this->regular_price = $product->regular_price;
-        $this->sale_price = $product->sale_price;
+        $this->sale = $product->sale;
         $this->appointment = $product->appointment;
         $this->composition = $product->composition;
         $this->features = $product->features;
@@ -73,7 +73,7 @@ class AdminEditProductComponent extends Component
             'sort_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required',
-            'sale_price' => 'required',
+            'sale' => 'required',
             'sku' => 'required',
             'appointment' => 'required',
             'composition' => 'required',
@@ -93,7 +93,7 @@ class AdminEditProductComponent extends Component
         $product->sort_description = $this->sort_description;
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
-        $product->sale_price = $this->sale_price;
+        $product->sale = $this->sale;
         $product->appointment = $this->appointment;
         $product->composition = $this->composition;
         $product->features = $this->features;

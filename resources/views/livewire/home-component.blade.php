@@ -78,13 +78,12 @@
                             <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Рекомендуемые</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Популярные</button>
+                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Распродажа</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Новые</button>
                         </li>
                     </ul>
-                    <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
                 </div>
                 <!--End nav-tabs-->
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
@@ -105,20 +104,34 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop.html">{{ $fproduct->category->name }}</a>
+                                            <a href="{{ route('product.category', ['slug'=>$fproduct->category->slug]) }}">{{ $fproduct->category->name }}</a>
                                         </div>
                                         <h2><a href="{{ route('product.details', ['slug'=>$fproduct->slug]) }}">{{ $fproduct->name }}</a></h2>
-                                            <div class="rating-result" title="90%">
-                                            <span>
-                                                <span>90%</span>
-                                            </span>
-                                        </div>
+                                            <div>
+                                                @if($fproduct->sale !==0)
+                                                <span>
+                                                    <span>Скидка {{ $fproduct->sale }}%</span>
+                                                </span>
+                                                @else
+                                                <span>
+                                                    <span>Выгодная цена</span>
+                                                </span>
+                                                @endif
+                                            </div>
                                         <div class="product-price">
+                                            @if($fproduct->sale !==0)
+                                                <span>
+                                                    ${{ $fproduct->sale_price }}
+                                                </span>
+                                                <span class="old-price">
+                                                    ${{ $fproduct->regular_price }}
+                                                </span>
+                                            @else
                                             <span>${{ $fproduct->regular_price }} </span>
-                                            <span class="old-price">$245.8</span>
+                                            @endif
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="В корзину" class="action-btn hover-up" href="#" wire:click.prevent="store({{$fproduct->id}}, '{{ $fproduct->name }}', {{ $fproduct->regular_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="В корзину" class="action-btn hover-up" href="#" wire:click.prevent="store({{$fproduct->id}}, '{{ $fproduct->name }}', {{ $fproduct->sale_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -130,45 +143,53 @@
                     <!--En tab one (Featured)-->
                     <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                         <div class="row product-grid-4">
-                            @foreach($featuredProducts as $fproduct)
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
-                                <div class="product-cart-wrap mb-30">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="product-details.html">
-                                                <img class="default-img" src="assets/imgs/shop/product-9-1.jpg" alt="">
-                                                <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg" alt="">
-                                            </a>
+                            @foreach($salesProducts as $sproduct)
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
+                                    <div class="product-cart-wrap mb-30">
+                                        <div class="product-img-action-wrap">
+                                            <div class="product-img product-img-zoom">
+                                                <a href="{{ route('product.details', ['slug'=>$sproduct->slug]) }}">
+                                                    <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $sproduct->image }}" alt="" height="280" width="280">
+                                                </a>
+                                            </div>
+                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="sale">Sale</span>
+                                            </div>
                                         </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-category">
-                                            <a href="shop.html">Donec </a>
-                                        </div>
-                                        <h2><a href="product-details.html">Lorem ipsum dolor</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span>
-                                                <span>90%</span>
-                                            </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$238.85 </span>
-                                            <span class="old-price">$245.8</span>
-                                        </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <div class="product-content-wrap">
+                                            <div class="product-category">
+                                                <a href="{{ route('product.category', ['slug'=>$sproduct->category->slug]) }}">{{ $sproduct->category->name }}</a>
+                                            </div>
+                                            <h2><a href="{{ route('product.details', ['slug'=>$sproduct->slug]) }}">{{ $sproduct->name }}</a></h2>
+                                            <div>
+                                                @if($sproduct->sale !==0)
+                                                    <span>
+                                                    <span>Скидка {{ $sproduct->sale }}%</span>
+                                                </span>
+                                                @else
+                                                    <span>
+                                                    <span>Выгодная цена</span>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-price">
+                                                @if($sproduct->sale !==0)
+                                                    <span>
+                                                    ${{ $sproduct->sale_price }}
+                                                </span>
+                                                    <span class="old-price">
+                                                    ${{ $sproduct->regular_price }}
+                                                </span>
+                                                @else
+                                                    <span>${{ $sproduct->regular_price }} </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-action-1 show">
+                                                <a aria-label="В корзину" class="action-btn hover-up" href="#" wire:click.prevent="store({{$sproduct->id}}, '{{ $sproduct->name }}', {{ $sproduct->regular_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <!--End product-grid-4-->
@@ -177,38 +198,52 @@
                     <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
                         <div class="row product-grid-4">
                             @foreach($latestProducts as $lproduct)
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
-                                <div class="product-cart-wrap mb-30">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">
-                                                <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="" height="280" width="280">
-                                            </a>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
+                                    <div class="product-cart-wrap mb-30">
+                                        <div class="product-img-action-wrap">
+                                            <div class="product-img product-img-zoom">
+                                                <a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">
+                                                    <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="" height="280" width="280">
+                                                </a>
+                                            </div>
+                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="new">New</span>
+                                            </div>
                                         </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-category">
-                                            <a href="{{ route('shop') }}">Music</a>
-                                        </div>
-                                        <h2><a href="{{ route('product.details', ['slug'=>$fproduct->slug]) }}">{{ $fproduct->name }}</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span>
-                                                <span>90%</span>
-                                            </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$238.85 </span>
-                                            <span class="old-price">$245.8</span>
-                                        </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="В корзину" class="action-btn hover-up" href="#" wire:click.prevent="store({{$fproduct->id}}, '{{ $fproduct->name }}', {{ $fproduct->regular_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <div class="product-content-wrap">
+                                            <div class="product-category">
+                                                <a href="{{ route('product.category', ['slug'=>$lproduct->category->slug]) }}">{{ $lproduct->category->name }}</a>
+                                            </div>
+                                            <h2><a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">{{ $lproduct->name }}</a></h2>
+                                            <div>
+                                                @if($lproduct->sale !==0)
+                                                    <span>
+                                                    <span>Скидка {{ $lproduct->sale }}%</span>
+                                                </span>
+                                                @else
+                                                    <span>
+                                                    <span>Выгодная цена</span>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-price">
+                                                @if($lproduct->sale !==0)
+                                                    <span>
+                                                    ${{ $lproduct->sale_price }}
+                                                </span>
+                                                    <span class="old-price">
+                                                    ${{ $lproduct->regular_price }}
+                                                </span>
+                                                @else
+                                                    <span>${{ $lproduct->regular_price }} </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-action-1 show">
+                                                <a aria-label="В корзину" class="action-btn hover-up" href="#" wire:click.prevent="store({{$lproduct->id}}, '{{ $lproduct->name }}', {{ $lproduct->regular_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <!--End product-grid-4-->
@@ -303,14 +338,29 @@
                                 </div>
                             </div>
                             <div class="product-content-wrap">
-                                <h2><a href="product-details.html">{{$lproduct->name}}</a></h2>
-                                <div class="rating-result" title="90%">
-                                    <span>
-                                    </span>
+                                <h2><a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">{{ $lproduct->name }}</a></h2>
+                                <div>
+                                    @if($lproduct->sale !==0)
+                                        <span>
+                                            <span>Скидка {{ $lproduct->sale }}%</span>
+                                        </span>
+                                    @else
+                                        <span>
+                                            <span>Выгодная цена</span>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="product-price">
-                                    <span>${{$lproduct->regular_price}}</span>
-{{--                                    <span class="old-price">$245.8</span>--}}
+                                    @if($lproduct->sale !==0)
+                                        <span>
+                                            ${{ $lproduct->sale_price }}
+                                        </span>
+                                        <span class="old-price">
+                                            ${{ $lproduct->regular_price }}
+                                        </span>
+                                    @else
+                                        <span>${{ $lproduct->regular_price }} </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

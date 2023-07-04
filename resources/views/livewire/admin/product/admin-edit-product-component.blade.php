@@ -69,9 +69,9 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <label for="sale_price" class="form-label">Цена со скидкой</label>
-                                        <input type="text" name="sale_price" class="form-control" placeholder="Цена со скидкой" wire:model="sale_price">
-                                        @error('sale_price')
+                                        <label for="sale_price" class="form-label">Скидка</label>
+                                        <input type="text" name="sale" class="form-control" placeholder="Скидка" wire:model="sale">
+                                        @error('sale')
                                         <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>

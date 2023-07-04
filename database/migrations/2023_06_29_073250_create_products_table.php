@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('sort_description')->nullable();
             $table->text('description')->nullable();
             $table->decimal('regular_price',8,2);
-            $table->decimal('sale_price',8,2)->nullable();
+            $table->integer('sale')->nullable();
+            $table->decimal('sale_price',8,2);
             $table->string('SKU');
             $table->string('appointment')->nullable();
             $table->string('composition')->nullable();
