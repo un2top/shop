@@ -102,7 +102,7 @@
                             <div class="tab-style3">
                                 <ul class="nav nav-tabs text-uppercase">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
+                                        <a class="nav-link" id="Description-tab" data-bs-toggle="tab"
                                            href="#Description">Описание</a>
                                     </li>
                                     <li class="nav-item">
@@ -110,12 +110,11 @@
                                            href="#Additional-info">Дополнительная информация</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Отзывы
-                                            (3)</a>
+                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Отзывы</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
-                                    <div class="tab-pane fade show active" id="Description">
+                                    <div class="tab-pane fade show" id="Description">
                                         <div class="">
                                             {{ $product->description }}
                                         </div>
@@ -162,38 +161,35 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade" id="Reviews">
+                                    <div class="tab-pane fade show active" id="Reviews">
                                         <!--Comments-->
+                                        @if(Session::has('message'))
+                                            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                        @endif
                                         <div class="comments-area">
                                             <div class="row">
                                                 <div class="col-lg-8">
-                                                    <h4 class="mb-30">Коментарии</h4>
+                                                    <h4 class="mb-30">Коментарии ({{$comments->count()}})</h4>
                                                     <div class="comment-list">
+                                                        @foreach($comments as $comment)
                                                         <div class="single-comment justify-content-between d-flex">
                                                             <div class="user justify-content-between d-flex">
                                                                 <div class="thumb text-center">
-                                                                    <img src="assets/imgs/page/avatar-6.jpg" alt="">
-                                                                    <h6><a href="#">Jacky Chan</a></h6>
-                                                                    <p class="font-xxs">Since 2012</p>
+                                                                    <img src="{{ asset('assets/imgs/page/avatar-6.jpg') }}" alt="">
+                                                                    <h6>{{ $comment->user->name }}</h6>
+                                                                    <p class="font-xxs"></p>
                                                                 </div>
                                                                 <div class="desc">
-                                                                    <div class="product-rate d-inline-block">
-                                                                        <div class="product-rating" style="width:90%">
-                                                                        </div>
-                                                                    </div>
-                                                                    <p>Thank you very fast shipping from Poland only
-                                                                        3days.</p>
+                                                                    <p>{{ $comment->content }}</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
-                                                                            <p class="font-xs mr-30">December 4, 2020 at
-                                                                                3:12 pm </p>
-                                                                            <a href="#" class="text-brand btn-reply">Reply
-                                                                                <i class="fi-rs-arrow-right"></i> </a>
+                                                                            <p class="font-xs mr-30">{{ $comment->created_at }} </p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @endforeach
                                                         <!--single-comment -->
                                                     </div>
                                                 </div>
@@ -204,13 +200,14 @@
                                             <h4 class="mb-15">Добавить коментарий</h4>
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-12">
-                                                    <form class="form-contact comment_form" action="#" id="commentForm">
+                                                    <form class="form-contact comment_form" wire:submit.prevent="storeComment({{ auth()->user()->id }} )">
                                                         <div class="row">
                                                             <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <textarea class="form-control w-100" name="comment"
-                                                                              id="comment" cols="30" rows="9"
-                                                                              placeholder="Напишите отзыв..."></textarea>
+                                                                <div class="mb-3 mt-3">
+                                                                    <textarea class="form-control" name="comment" placeholder="Описание" wire:model="comment"></textarea>
+                                                                    @error('comment')
+                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                         </div>
