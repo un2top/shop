@@ -16,9 +16,6 @@
         .wishlisted i{
             color: #fff !important;
         }
-        .product-cart-wrap .product-action-1 button:after, .product-cart-wrap .product-action-1 a.action-btn {
-            left: -52%;
-        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -75,11 +72,47 @@
                                         @endif
                                     </div>
                                     <div class="product-action-1 show">
-                                            <a aria-label="Убрать из избранного" class="action-btn hover-up wishlisted"
+                                            <a aria-label="Убрать" class="action-btn hover-up wishlisted"
                                                href="#" wire:click.prevent="removeFromWishList({{ $item->model->id }})"><i class="fi-rs-heart"></i></a>
-{{--                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="#"--}}
-{{--                                           wire:click.prevent="store({{ $item->model->id }}, '{{ $item->model->name }}', {{ $item->model->regular_price }})"><i--}}
-{{--                                                class="fi-rs-shopping-bag-add"></i></a>--}}
+                                    </div>
+                                    <hr>
+                                    <div>
+                                            <tr>
+                                                <td>Назначение</td>
+                                                <td>
+                                                    <p>{{ $item->model->appointment }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Состав</td>
+                                                <td>
+                                                    <p>{{ $item->model->composition }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Особенности модели</td>
+                                                <td>
+                                                    <p>{{ $item->model->features }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Уход за вещами</td>
+                                                <td>
+                                                    <p>{{ $item->model->taking_care }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Тип посадки</td>
+                                                <td>
+                                                    <p>{{ $item->model->landing }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Рисунок</td>
+                                                <td>
+                                                    <p>{{ $item->model->drawing }}</p>
+                                                </td>
+                                            </tr>
                                     </div>
                                 </div>
                             </div>

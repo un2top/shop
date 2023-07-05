@@ -21,6 +21,7 @@ class HomeSliderFactory extends Factory
         $title = $this->faker->unique()->randomElement(['Модные тренды', 'Специальные цены']);
         $subTitle = $this->faker->unique()->randomElement(['Новые коллекции', 'Топовые бренды']);
         $offer = $this->faker->unique()->randomElement(['Скидки на зимние вещи', 'Добавляйте нас в соц. сетях']);
+        $img = $this->faker->unique()->randomElement(['1', '2']);
         return [
             'top_title' => $topTitle,
             'title' => $title,
@@ -28,7 +29,7 @@ class HomeSliderFactory extends Factory
             'offer' => $offer,
             'link' => 'http://127.0.0.1:8000/shop',
             'status' => 1,
-            'image' => $this->faker->numberBetween(1, 2) . '.jpg',
+            'image' => $img . '.jpg',
 
         ];
     }

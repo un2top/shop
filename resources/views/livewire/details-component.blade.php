@@ -183,7 +183,7 @@
                                                                     <p>{{ $comment->content }}</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
-                                                                            <p class="font-xs mr-30">{{ $comment->created_at }} </p>
+                                                                            <p class="font-xs mr-30">{{ $comment->dateAsCarbon->diffForHumans() }} </p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -196,6 +196,7 @@
                                             </div>
                                         </div>
                                         <!--comment form-->
+                                        @auth()
                                         <div class="comment-form">
                                             <h4 class="mb-15">Добавить коментарий</h4>
                                             <div class="row">
@@ -220,6 +221,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

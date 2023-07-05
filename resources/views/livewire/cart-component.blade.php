@@ -41,7 +41,8 @@
                                             </td>
                                             <td class="product-des product-name">
                                                 <h5 class="product-name"><a
-                                                        href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">{{ $item->model->name }}</a></h5>
+                                                        href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">{{ $item->model->name }}</a>
+                                                </h5>
                                             </td>
                                             <td class="price" data-title="Price">
                                                 <span>${{ $item->model->sale_price }} </span></td>
@@ -66,55 +67,46 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="6" class="text-end">
-                                            <a href="#" class="text-muted" wire:click.prevent="clearAll()"> <i class="fi-rs-cross-small"></i>Очистить корзину</a>
+                                            <a href="#" class="text-muted" wire:click.prevent="clearAll()"> <i
+                                                    class="fi-rs-cross-small"></i>Очистить корзину</a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
-                            @else
-                                <p>Товара в корзине нет</p>
-                            @endif
-                        </div>
-                        <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
-                        <div class="row mb-50">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="border p-md-4 p-30 border-radius cart-totals">
-                                    <div class="heading_s1 mb-3">
-                                        <h4>Корзина</h4>
+                                <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="border p-md-4 p-30 border-radius cart-totals">
+                                        <div class="heading_s1 mb-3">
+                                            <h4>Корзина</h4>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <td class="cart_total_label">Доставка</td>
+                                                    <td class="cart_total_amount"><i class="ti-gift mr-5"></i> Бесплатно
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="cart_total_label">Всего</td>
+                                                    <td class="cart_total_amount"><strong><span
+                                                                class="font-xl fw-900 text-brand">${{Cart::subtotal()}}</span></strong>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="{{ route('shop.checkout') }}" class="btn "> <i
+                                                class="fi-rs-box-alt mr-10"></i>Оформить</a>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td class="cart_total_label">Общая сумма</td>
-                                                <td class="cart_total_amount"><span
-                                                        class="font-lg fw-900 text-brand">${{ Cart::subtotal() }}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="cart_total_label">НДС</td>
-                                                <td class="cart_total_amount"><span
-                                                        class="font-lg fw-900 text-brand">${{ Cart::tax() }}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="cart_total_label">Доставка</td>
-                                                <td class="cart_total_amount"><i class="ti-gift mr-5"></i> Бесплатно
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="cart_total_label">Всего</td>
-                                                <td class="cart_total_amount"><strong><span
-                                                            class="font-xl fw-900 text-brand">${{Cart::total()}}</span></strong>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <a href="checkout.html" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To
-                                        CheckOut</a>
                                 </div>
-                            </div>
+                            @else
+                                <div class="text-center" style="padding: 30px 0">
+                                    <h2>Корзина пустая</h2>
+                                    <p>Перейти к покупкам</p>
+                                    <a href="{{route('shop')}}" class="btn btn-success">Товары</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
