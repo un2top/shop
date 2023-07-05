@@ -49,6 +49,7 @@ class CheckoutComponent extends Component
         $order->postIndex = $this->postIndex;
         $order->telephone = $this->telephone;
         $order->status = 'ordered';
+        $order->paymentmode = $this->paymentmode;
         $order->save();
 
         foreach (Cart::instance('cart')->content() as $item) {
@@ -60,7 +61,7 @@ class CheckoutComponent extends Component
             $orderItem->save();
         }
 
-        if ($this->paymentmode == 'cod') {
+        if ($this->paymentmode == 'cod' || $this->paymentmode == 'codcart') {
             $transaction = new Transaction();
             $transaction->user_id = $order->user_id;
             $transaction->order_id = $order->id;

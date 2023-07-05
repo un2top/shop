@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('postIndex');
             $table->string('telephone');
             $table->enum('status',['ordered', 'delivered', 'canceled'])->default('ordered');
+            $table->enum('paymentmode',['cod', 'codcard', 'card'])->default('cod');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
