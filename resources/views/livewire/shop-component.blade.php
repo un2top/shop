@@ -148,9 +148,9 @@
                             @endforeach
                         </div>
                         <!--pagination-->
-                        <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
-                            {{ $products->links() }}
-                        </div>
+                            <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                                {{ $products->links() }}
+                            </div>
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
                         <div class="row">

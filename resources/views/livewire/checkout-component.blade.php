@@ -71,11 +71,38 @@
                                     </div>
                                     <div class="custome-radio">
                                         <input class="form-check-input"  type="radio" name="paymentmode"
-                                               id="exampleRadios4" value="card" wire:model="paymentmode">
-                                        <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse"
+                                               id="exampleRadios5" value="card" wire:model="paymentmode">
+                                        <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
                                                data-target="#cardPayment" aria-controls="cardPayment">Онлаин</label>
                                     </div>
                                     @error('paymentmode')<span class="text-danger">{{ $message }}</span>@enderror
+                                    @if($paymentmode == "card")
+                                    <div class="col-md-6">
+                                        @if(Session::has('stripe_error'))
+                                            <div class="alert alert-danger" role="alert">{{ Session::get('stripe_error') }}</div>
+                                        @endif
+                                        <div class="form-group">
+                                            <input  type="text" name="card-no" placeholder="Номер карты"
+                                                    wire:model="card_no">
+                                            @error('card-no')<span class="text-danger">{{ $message }}</span>@enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input  type="text" name="exp-month" placeholder="Срок действия месяц: MM"
+                                                    wire:model="exp_month">
+                                            @error('exp-month')<span class="text-danger">{{ $message }}</span>@enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input  type="text" name="exp-year" placeholder="Срок действия год: YYYY"
+                                                    wire:model="exp_year">
+                                            @error('exp-year')<span class="text-danger">{{ $message }}</span>@enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input  type="password" name="cvc" placeholder="CVC"
+                                                    wire:model="cvc">
+                                            @error('cvc')<span class="text-danger">{{ $message }}</span>@enderror
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-fill-out btn-block mt-30">Оформить</button>

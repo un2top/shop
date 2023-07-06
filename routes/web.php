@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoriesComponent;
 use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
@@ -67,6 +68,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
     Route::get('/admin/slider',  AdminHomeSliderComponent::class)->name('admin.home.slider');
     Route::get('/admin/slider/add',  AdminAddHomeSlideComponent::class)->name('admin.home.slide.add');
     Route::get('/admin/slider/edit/{slide_id}',  AdminEditHomeSlideComponent::class)->name('admin.home.slide.edit');
+    Route::get('/admin/orders/{order_id}',  AdminOrderDetailsComponent::class)->name('admin.orderdetails');
 });
 
 
