@@ -37,7 +37,7 @@
                                         <a href="{{ route('product.details', ['slug'=>$item->model->slug]) }}">
                                             <img class="default-img"
                                                  src="{{ asset('assets/imgs/products')}}/{{ $item->model->image }}"
-                                                 alt="{{ $item->model->name }}">
+                                                 alt="{{ $item->model->name }}" width="280" height="280">
                                         </a>
                                     </div>
                                 </div>

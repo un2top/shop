@@ -55,7 +55,7 @@
                                         <tr>
                                             <td>{{++$i}}</td>
                                             <td><img src="{{ asset('assets/imgs/products')}}/{{ $product->image }}" alt="{{ $product->name }}" width="60"> </td>
-                                            <td>{{$product->name}}</td>
+                                            <td><a href="{{ route('product.details', $product->slug) }}">{{$product->name}}</a></td>
                                             <td>{{$product->stock_status}}</td>
                                             <td>{{$product->regular_price}}</td>
                                             <td>{{$product->category->name}}</td>

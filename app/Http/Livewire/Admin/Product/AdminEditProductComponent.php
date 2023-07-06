@@ -94,6 +94,7 @@ class AdminEditProductComponent extends Component
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
         $product->sale = $this->sale;
+        $product->sale_price = $this->regular_price - $this->regular_price * $this->sale / 100;
         $product->appointment = $this->appointment;
         $product->composition = $this->composition;
         $product->features = $this->features;
@@ -105,8 +106,7 @@ class AdminEditProductComponent extends Component
         $product->featured = $this->featured;
         $product->quantity = $this->quantity;
 
-        if ($this->newimage)
-        {
+        if ($this->newimage) {
             unlink('assets/imgs/products/' . $product->image);
             $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
             $this->newimage->storeAs('products', $imageName);

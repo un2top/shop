@@ -29,5 +29,11 @@ class DatabaseSeeder extends Seeder
              'password'=>Hash::make('12345678'),
              'utype'=>'ADM',
          ]);
+        \App\Models\User::factory()->create([
+            'name' => 'user',
+            'email' => 'user@mail.ru',
+            'password'=>Hash::make('12345678'),
+            'utype'=>'USR',
+        ]);
     }
 }

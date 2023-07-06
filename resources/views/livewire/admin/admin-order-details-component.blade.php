@@ -46,7 +46,8 @@
                                             <td>Товары</td>
                                             <td colspan="2">
                                                 @foreach($order->orderItems as $item)
-                                                    <p><a href="{{ route('product.details', $item->product->slug) }}">{{ $item->product->name }} </a>x {{ $item->quantity }} </p>
+                                                    <p><a href="{{ route('product.details', $item->product->slug) }}">{{ $item->product->name }} </a>x {{ $item->quantity }}
+                                                        <a href="#" wire:click.prevent="deleteOrderItem({{$item->id}}, {{ $item->quantity }})" class="text-danger">Удалить</a> </p>
                                                 @endforeach
                                             </td>
                                         </tr>
