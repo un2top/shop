@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class AdminDashboardComponent extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public function render()
     {
         $orders = Order::orderBy('created_at', 'DESC')->paginate(10);
