@@ -20,10 +20,11 @@ class HomeComponent extends Component
     {
         $slides = HomeSlider::where('status',1)->get();
         $latestProducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
+        $limitedProducts = Product::orderBy('quantity', 'ASC')->get()->take(8);
         $featuredProducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
         $salesProducts = Product::where('sale','!=', 0)->inRandomOrder()->get()->take(8);
         $popularCategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
 
-        return view('livewire.home-component', compact('slides', 'latestProducts', 'featuredProducts', 'popularCategories', 'salesProducts'));
+        return view('livewire.home-component', compact('slides', 'latestProducts', 'featuredProducts', 'popularCategories', 'salesProducts', 'limitedProducts'));
     }
 }

@@ -83,6 +83,9 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Новые</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="nav-tab-four" data-bs-toggle="tab" data-bs-target="#tab-four" type="button" role="tab" aria-controls="tab-four" aria-selected="false">Ограниченный тираж</button>
+                        </li>
                     </ul>
                 </div>
                 <!--End nav-tabs-->
@@ -249,6 +252,59 @@
                         <!--End product-grid-4-->
                     </div>
                     <!--En tab three (New added)-->
+                    <div class="tab-pane fade" id="tab-four" role="tabpanel" aria-labelledby="tab-three">
+                        <div class="row product-grid-4">
+                            @foreach($limitedProducts as $limproduct)
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
+                                    <div class="product-cart-wrap mb-30">
+                                        <div class="product-img-action-wrap">
+                                            <div class="product-img product-img-zoom">
+                                                <a href="{{ route('product.details', ['slug'=>$limproduct->slug]) }}">
+                                                    <img class="default-img" src="{{ asset('assets/imgs/products')}}/{{ $limproduct->image }}" alt="" height="280" width="280">
+                                                </a>
+                                            </div>
+                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="new">New</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-content-wrap">
+                                            <div class="product-category">
+                                                <a href="{{ route('product.category', ['slug'=>$limproduct->category->slug]) }}">{{ $limproduct->category->name }}</a>
+                                            </div>
+                                            <h2><a href="{{ route('product.details', ['slug'=>$limproduct->slug]) }}">{{ $limproduct->name }}</a></h2>
+                                            <div>
+                                                @if($limproduct->sale !==0)
+                                                    <span>
+                                                    <span>Скидка {{ $limproduct->sale }}%</span>
+                                                </span>
+                                                @else
+                                                    <span>
+                                                    <span>Выгодная цена</span>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-price">
+                                                @if($limproduct->sale !==0)
+                                                    <span>
+                                                    ${{ $limproduct->sale_price }}
+                                                </span>
+                                                    <span class="old-price">
+                                                    ${{ $limproduct->regular_price }}
+                                                </span>
+                                                @else
+                                                    <span>${{ $limproduct->regular_price }} </span>
+                                                @endif
+                                            </div>
+                                            <div class="product-action-1 show">
+                                                <a aria-label="В корзину" class="action-btn hover-up" href="#" wire:click.prevent="store({{$limproduct->id}}, '{{ $limproduct->name }}', {{ $limproduct->regular_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!--End product-grid-4-->
+                    </div>
                 </div>
                 <!--End tab-content-->
             </div>
