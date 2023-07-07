@@ -19,17 +19,29 @@
                                         <div class="heading_s1">
                                             <h3 class="mb-30">Создать аккаунт</h3>
                                         </div>
+                                        @if(Session::has('message'))
+                                            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                        @endif
                                         <form method="post" action="{{  route('register') }}">
                                             @csrf
                                             <div class="form-group">
                                                 <input type="text" required="" name="name" placeholder="Имя" value="{{ old('name') }}" required autofocus autocomplete="name">
                                             </div>
+                                            @error('name')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                             <div class="form-group">
                                                 <input type="text" required="" name="email" placeholder="Email" value="{{ old('email') }}">
                                             </div>
+                                            @error('email')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                             <div class="form-group">
                                                 <input required="" type="password" name="password" placeholder="Пароль" required  autocomplete="new-password">
                                             </div>
+                                            @error('password')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                             <div class="form-group">
                                                 <input required="" type="password" name="password_confirmation" placeholder="Подтвердить пароль" required  autocomplete="new-password">
                                             </div>
@@ -40,7 +52,7 @@
                                                             <label class="form-check-label" for="exampleCheckbox12"><span>Согласен(а) с условиями</span></label>
                                                     </div>
                                                 </div>
-                                                <a href="privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Условия</a>
+                                                <a href="{{ route('policy') }}"><i class="fi-rs-book-alt mr-5 text-muted"></i>Условия</a>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Регистрация</button>

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class DetailsComponent extends Component
@@ -16,6 +17,7 @@ class DetailsComponent extends Component
     {
         $this->slug = $slug;
     }
+
     public function addToWitchList($product_id, $product_name, $product_price)
     {
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
@@ -57,6 +59,16 @@ class DetailsComponent extends Component
 
     public function render()
     {
+
+        $lastView = Session::get('last.products');
+        if (count(session()->get('last.products')) > 20) {
+            unset($lastView[0]);
+            $lastView = array_values($lastView);
+            Session::put('last.products', $lastView);
+        }
+        if (!in_array($this->slug, session()->get('last.products'))) {
+            session()->push('last.products', $this->slug);
+        }
 
         $comments = Comment::where('product_slug', $this->slug)->limit(10)->get();
         $product = Product::where('slug', $this->slug)->first();

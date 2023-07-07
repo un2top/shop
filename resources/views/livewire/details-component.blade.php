@@ -114,7 +114,7 @@
                                     </li>
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
-                                    <div class="tab-pane fade show" id="Description">
+                                    <div class="tab-pane fade show active" id="Description">
                                         <div class="">
                                             {{ $product->description }}
                                         </div>
@@ -161,7 +161,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade show active" id="Reviews">
+                                    <div class="tab-pane fade show" id="Reviews">
                                         <!--Comments-->
                                         @if(Session::has('message'))
                                             <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
@@ -196,7 +196,7 @@
                                             </div>
                                         </div>
                                         <!--comment form-->
-                                        @auth()
+                                        @if(auth()->user())
                                         <div class="comment-form">
                                             <h4 class="mb-15">Добавить коментарий</h4>
                                             <div class="row">
@@ -205,7 +205,7 @@
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <div class="mb-3 mt-3">
-                                                                    <textarea class="form-control" name="comment" placeholder="Описание" wire:model="comment"></textarea>
+                                                                    <textarea class="form-control" name="comment" placeholder="Описание" wire:model.defer="comment"></textarea>
                                                                     @error('comment')
                                                                     <p class="text-danger">{{ $message }}</p>
                                                                     @enderror
@@ -221,6 +221,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @else
+                                        <span>Для оставления комментария необходимо </span><a href="#">авторизироваться</a>
                                         @endif
                                     </div>
                                 </div>

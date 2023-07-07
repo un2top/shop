@@ -2449,7 +2449,6 @@ label {
 .page-header .breadcrumb {
   display: inline-block;
   padding: 0;
-  text-transform: capitalize;
   color: #6e6e6e;
   font-size: 0.875rem;
   background: none;
@@ -3564,6 +3563,10 @@ table .product-thumbnail img {
 
 .product-cart-wrap .product-badges span.new {
   background-color: #99bbad;
+}
+
+.product-cart-wrap .product-badges span.limit {
+    background-color: #ffdb00;
 }
 
 .product-cart-wrap .product-badges span.sale {
@@ -9943,5 +9946,108 @@ span.fi-rs-apps {
 	.mob-app{
 		padding-left:3%;
 	}
+}
+
+.CountDown {
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+}
+.CountDown-block {
+    visibility: visible;
+    text-align: center;
+}
+.CountDown-block + .CountDown-block {
+    margin-left: 9px;
+}
+.CountDown-days,
+.CountDown-hours,
+.CountDown-minutes,
+.CountDown-secs {
+    width: 55px;
+    height: 53px;
+    background-color: #ebebeb;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2em;
+    letter-spacing: 1.1px;
+    color: #424650;
+}
+.CountDown-label {
+    color: #747880;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 5px;
+    display: block;
+}
+.CountDown_vt {
+    display: block;
+}
+.CountDown_vt .CountDown-block {
+    width: 79px;
+    height: 80px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.05);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+@media screen and (max-width: 480px) {
+    .CountDown_vt .CountDown-block {
+        width: 60px;
+        height: 60px;
+    }
+}
+.CountDown_vt .CountDown-block + .CountDown-block {
+    margin-left: 0;
+    margin-top: 10px;
+}
+.CountDown_vt .CountDown-label {
+    width: 100%;
+    opacity: 0.7;
+    color: #424650;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 0;
+}
+.CountDown_vt .CountDown-days,
+.CountDown_vt .CountDown-hours,
+.CountDown_vt .CountDown-minutes,
+.CountDown_vt .CountDown-secs {
+    width: auto;
+    height: auto;
+    padding: 0;
+    background: none;
+    font-size: 28px;
+    letter-spacing: 1.4px;
+}
+@media screen and (max-width: 480px) {
+    .CountDown_vt .CountDown-days,
+    .CountDown_vt .CountDown-hours,
+    .CountDown_vt .CountDown-minutes,
+    .CountDown_vt .CountDown-secs {
+        font-size: 22px;
+    }
+}
+@media screen and (max-width: 990px) {
+    .CountDown_vt {
+        display: flex;
+        margin-top: 10px;
+    }
+    .CountDown_vt .CountDown-block + .CountDown-block {
+        margin-top: 0;
+        margin-left: 10px;
+    }
 }
 

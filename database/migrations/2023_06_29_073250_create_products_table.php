@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('drawing')->nullable();
             $table->enum('stock_status', ['instock', 'outofstock']);
             $table->boolean('featured')->default(false);
+            $table->boolean('saleday')->default(false);
             $table->unsignedBigInteger('quantity')->default(10);
             $table->string('image');
             $table->bigInteger('category_id')->unsigned()->nullable();
