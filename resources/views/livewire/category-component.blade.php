@@ -59,6 +59,7 @@
                                             <li><a class="{{ $orderBy == 'Сначала недорогие' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала недорогие')">Сначала недорогие</a></li>
                                             <li><a class="{{ $orderBy == 'Сначала дорогие' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала дорогие')">Сначала дорогие</a></li>
                                             <li><a class="{{ $orderBy == 'Сначала новые' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала новые')">Сначала новые</a></li>
+                                            <li><a class="{{ $orderBy == 'Сначала популярные' ? 'active': '' }}" href="#" wire:click.prevent="changeOrderBy('Сначала новые')">Сначала популярные</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -51,6 +51,8 @@ class CategoryComponent extends Component
             $products = Product::where('category_id', $category_id)->orderBy('regular_price', 'DESC')->paginate($this->pageSize);
         } elseif ($this->orderBy == 'Сначала новые') {
             $products = Product::where('category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+        } elseif ($this->orderBy == 'Сначала популярные') {
+            $products = Product::where('category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pageSize);
         } else {
             $products = Product::where('category_id', $category_id)->paginate($this->pageSize);
         }

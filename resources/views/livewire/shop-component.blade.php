@@ -30,6 +30,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
+                        @if(Session::has('message'))
+                            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                        @endif
                         <div class="shop-product-fillter">
                             <div class="totall-product">
                                 <p> Найдено <strong class="text-brand">{{ $products->total() }}</strong> товаров
@@ -74,12 +77,17 @@
                                             </li>
                                             <li><a class="{{ $orderBy == 'Сначала недорогие' ? 'active': '' }}" href="#"
                                                    wire:click.prevent="changeOrderBy('Сначала недорогие')">Сначала
-                                                    недорогие</a></li>
+                                                    недорогие</a>
+                                            </li>
                                             <li><a class="{{ $orderBy == 'Сначала дорогие' ? 'active': '' }}" href="#"
                                                    wire:click.prevent="changeOrderBy('Сначала дорогие')">Сначала
-                                                    дорогие</a></li>
+                                                    дорогие</a>
+                                            </li>
                                             <li><a class="{{ $orderBy == 'Сначала новые' ? 'active': '' }}" href="#"
                                                    wire:click.prevent="changeOrderBy('Сначала новые')">Сначала новые</a>
+                                            </li>
+                                            <li><a class="{{ $orderBy == 'Сначала популярные' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('Сначала популярные')">Сначала популярные</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -105,6 +113,9 @@
                                         <div class="product-content-wrap">
                                             <div class="product-category">
                                                 <a href="{{ route('product.category', ['slug'=>$product->category->slug]) }}">{{ $product->category->name }}</a>
+                                            </div>
+                                            <div class="product-price">
+                                                <span><a href="{{ route('label', $product->label->slug) }}">{{ $product->label->name }}</a></span>
                                             </div>
                                             <h2><a href="{{ route('product.details', ['slug'=>$product->slug]) }}">{{ $product->name }}</a></h2>
                                             <div>
@@ -197,11 +208,8 @@
                                     <img src="{{ asset('assets/imgs/products')}}/{{ $lproduct->image }}" alt="#">
                                 </div>
                                 <div class="content pt-10">
-                                    <h5><a href="product-details.html">{{ $lproduct->name }}</a></h5>
+                                    <h5><a href="{{ route('product.details', $lproduct->slug) }}">{{ $lproduct->name }}</a></h5>
                                     <p class="price mb-0 mt-5">${{ $lproduct->regular_price }}</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:90%"></div>
-                                    </div>
                                 </div>
                             </div>
                             @endforeach

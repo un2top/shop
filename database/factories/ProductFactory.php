@@ -43,6 +43,7 @@ class ProductFactory extends Factory
 
             'image' => $this->faker->numberBetween(1, 27) . '.jpg',
             'category_id' => $this->faker->numberBetween(1, 11),
+            'label_id' => $this->faker->numberBetween(1, 3),
             'featured' => $this->faker->boolean(70),
 
         ];

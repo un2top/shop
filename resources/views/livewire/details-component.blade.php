@@ -31,6 +31,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
+                        @if(Session::has('message'))
+                            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                        @endif
                         <div class="product-detail accordion-detail">
                             <div class="row mb-50">
                                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -163,13 +166,13 @@
                                     </div>
                                     <div class="tab-pane fade show" id="Reviews">
                                         <!--Comments-->
-                                        @if(Session::has('message'))
+                                        @if(Session::has('commentmessage'))
                                             <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                         @endif
                                         <div class="comments-area">
                                             <div class="row">
                                                 <div class="col-lg-8">
-                                                    <h4 class="mb-30">Коментарии ({{$comments->count()}})</h4>
+                                                    <h4 class="mb-30">Отзывы</h4>
                                                     <div class="comment-list">
                                                         @foreach($comments as $comment)
                                                         <div class="single-comment justify-content-between d-flex">
@@ -191,6 +194,9 @@
                                                         </div>
                                                         @endforeach
                                                         <!--single-comment -->
+                                                            <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                                                                {{ $comments->links() }}
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,7 +228,7 @@
                                             </div>
                                         </div>
                                         @else
-                                        <span>Для оставления комментария необходимо </span><a href="#">авторизироваться</a>
+                                        <span>Для оставления комментария необходимо </span><a href="{{ route('login') }}">авторизироваться</a>
                                         @endif
                                     </div>
                                 </div>

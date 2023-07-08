@@ -32,12 +32,19 @@ class HomeComponent extends Component
         if($timeToEnd<0){
             $this->productTimer();
         } elseif ($timeToEnd==0){
+            $productDay = Product::where('saleday', 1)->first();
+            $productDay->saleday=false;
+            $this->oneLimitProduct();
+        }
+    }
+
+    public function oneLimitProduct(){
+        if(is_null(Product::where('saleday', 1)->first())){
             $limitedProducts = Product::orderBy('quantity', 'ASC')->get()->take(8);
             $productDay = $limitedProducts->random();
             $productDay->saleday=true;
             $productDay->save();
         }
-
     }
 
 
@@ -46,6 +53,8 @@ class HomeComponent extends Component
         if (!session()->has('last.products')) {
             session()->put('last.products', []);
         }
+//        session()->forget('last.products');
+        $this->oneLimitProduct();
         $this->productTimer();
         $slides = HomeSlider::where('status', 1)->get();
         $latestProducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
@@ -59,6 +68,7 @@ class HomeComponent extends Component
         foreach (session()->get('last.products') as $product) {
             $viewProducts->push(Product::where('slug', $product)->first());
         }
+
         return view('livewire.home-component', compact('oneLimitedProduct','viewProducts','slides', 'latestProducts', 'featuredProducts', 'popularCategories', 'salesProducts', 'limitedProducts'));
     }
 }

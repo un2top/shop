@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
@@ -24,6 +25,7 @@ class ShopComponent extends Component
         Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\Product');
         session()->flash('success_message', 'Товар добавлен в корзину');
         $this->emitTo('cart-icon-component', 'refreshComponent');
+        session()->flash('message', 'Товар добавлен в корзину');
     }
 
     public function changeOrderBy($order)
@@ -61,6 +63,10 @@ class ShopComponent extends Component
             $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('regular_price', 'DESC')->paginate($this->pageSize);
         } elseif ($this->orderBy == 'Сначала новые') {
             $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+//        }
+//        elseif ($this->orderBy == 'Сначала популярные') {
+//            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])
+//            ->whereRelation('comments', 'comments')->orderBy('created_at', 'DESC')->paginate($this->pageSize);
         } else {
             $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->paginate($this->pageSize);
         }

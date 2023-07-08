@@ -8,9 +8,12 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DetailsComponent extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $slug, $comment;
 
     public function mount($slug)
@@ -34,7 +37,7 @@ class DetailsComponent extends Component
         $comment->product_slug = $this->slug;
         $comment->user_id = $user_id;
         $comment->save();
-        session()->flash('message', 'Комментарий был добавлен');
+        session()->flash('commentmessage', 'Комментарий был добавлен');
         return redirect(request()->header('Referer'));
     }
 
@@ -55,6 +58,7 @@ class DetailsComponent extends Component
         Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\Product');
         session()->flash('success_message', 'Товар добавлен в корзину');
         $this->emitTo('cart-icon-component', 'refreshComponent');
+        session()->flash('message', 'Товар добавлен в корзину');
     }
 
     public function render()
@@ -70,7 +74,7 @@ class DetailsComponent extends Component
             session()->push('last.products', $this->slug);
         }
 
-        $comments = Comment::where('product_slug', $this->slug)->limit(10)->get();
+        $comments = Comment::where('product_slug', $this->slug)->paginate(5);
         $product = Product::where('slug', $this->slug)->first();
         $relatedProducts = Product::where('category_id', $product->category_id)->limit(4)->get();
         $nproducts = Product::Latest()->take(4)->get();

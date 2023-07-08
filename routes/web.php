@@ -18,6 +18,7 @@ use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\CommentComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\LabelComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\ShopComponent;
@@ -50,6 +51,7 @@ Route::get('/search', SearchComponent::class)->name('product.search');
 Route::get('/thank-you', ThankyouComponent::class)->name('thankyou');
 Route::get('/private-policy', PrivacyPolicyComponent::class)->name('policy');
 Route::get('/terms-conditions', TermConditionsComponent::class)->name('terms');
+Route::get('/label/{slug}', LabelComponent::class)->name('label');
 
 
 //Route::middleware('auth')->group(function () {

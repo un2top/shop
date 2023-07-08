@@ -36,37 +36,37 @@
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('assets/imgs/theme/icons/feature-1.png') }}" alt="">
-                            <h4 class="bg-1">Free Shipping</h4>
+                            <h4 class="bg-1">Бесплатная доставка</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('assets/imgs/theme/icons/feature-2.png') }}" alt="">
-                            <h4 class="bg-3">Online Order</h4>
+                            <h4 class="bg-3">Онлаин заказ</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('assets/imgs/theme/icons/feature-3.png') }}" alt="">
-                            <h4 class="bg-2">Save Money</h4>
+                            <h4 class="bg-2">Экономия денег</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('assets/imgs/theme/icons/feature-4.png') }}" alt="">
-                            <h4 class="bg-4">Promotions</h4>
+                            <h4 class="bg-4">Акции</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('assets/imgs/theme/icons/feature-5.png') }}" alt="">
-                            <h4 class="bg-5">Happy Sell</h4>
+                            <h4 class="bg-5">Легкя покупка</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="{{ asset('assets/imgs/theme/icons/feature-6.png') }}" alt="">
-                            <h4 class="bg-6">24/7 Support</h4>
+                            <h4 class="bg-6">Поддержка 24/7</h4>
                         </div>
                     </div>
                 </div>
@@ -130,6 +130,9 @@
                                             <div class="product-category">
                                                 <a href="{{ route('product.category', ['slug'=>$fproduct->category->slug]) }}">{{ $fproduct->category->name }}</a>
                                             </div>
+                                            <div class="product-price">
+                                                <span><a href="{{ route('label', $fproduct->label->slug) }}">{{ $fproduct->label->name }}</a></span>
+                                            </div>
                                             <h2>
                                                 <a href="{{ route('product.details', ['slug'=>$fproduct->slug]) }}">{{ $fproduct->name }}</a>
                                             </h2>
@@ -189,6 +192,9 @@
                                         <div class="product-content-wrap">
                                             <div class="product-category">
                                                 <a href="{{ route('product.category', ['slug'=>$sproduct->category->slug]) }}">{{ $sproduct->category->name }}</a>
+                                            </div>
+                                            <div class="product-price">
+                                                <span><a href="{{ route('label', $sproduct->label->slug) }}">{{ $sproduct->label->name }}</a></span>
                                             </div>
                                             <h2>
                                                 <a href="{{ route('product.details', ['slug'=>$sproduct->slug]) }}">{{ $sproduct->name }}</a>
@@ -250,6 +256,9 @@
                                             <div class="product-category">
                                                 <a href="{{ route('product.category', ['slug'=>$lproduct->category->slug]) }}">{{ $lproduct->category->name }}</a>
                                             </div>
+                                            <div class="product-price">
+                                                <span><a href="{{ route('label', $lproduct->label->slug) }}">{{ $lproduct->label->name }}</a></span>
+                                            </div>
                                             <h2>
                                                 <a href="{{ route('product.details', ['slug'=>$lproduct->slug]) }}">{{ $lproduct->name }}</a>
                                             </h2>
@@ -310,6 +319,9 @@
                                             <div class="product-category">
                                                 <a href="{{ route('product.category', ['slug'=>$limproduct->category->slug]) }}">{{ $limproduct->category->name }}</a>
                                             </div>
+                                            <div class="product-price">
+                                                <span><a href="{{ route('label', $limproduct->label->slug) }}">{{ $limproduct->label->name }}</a></span>
+                                            </div>
                                             <h2>
                                                 <a href="{{ route('product.details', ['slug'=>$limproduct->slug]) }}">{{ $limproduct->name }}</a>
                                             </h2>
@@ -366,10 +378,13 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="{{ route('product.category', ['slug'=>$oneLimitedProduct->category->slug]) }}">{{ $oneLimitedProduct->category->name }}</a>
+                                            <a href="{{ route('product.category', $oneLimitedProduct->category->slug) }}">{{ $oneLimitedProduct->category->name }}</a>
+                                        </div>
+                                        <div class="product-price">
+                                            <span><a href="{{ route('label', $oneLimitedProduct->label->slug) }}">{{ $oneLimitedProduct->label->name }}</a></span>
                                         </div>
                                         <h2>
-                                            <a href="{{ route('product.details', ['slug'=>$oneLimitedProduct->slug]) }}">{{ $oneLimitedProduct->name }}</a>
+                                            <a href="{{ route('product.details', $oneLimitedProduct->slug) }}">{{ $oneLimitedProduct->name }}</a>
                                         </h2>
                                         <div>
                                             @if($oneLimitedProduct->sale !==0)
@@ -550,6 +565,7 @@
                              id="carausel-6-columns-2-arrows"></div>
                         <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
                             @foreach($viewProducts as $vproduct)
+                                @if(!is_null($vproduct))
                                 <div class="product-cart-wrap small hover-up">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
@@ -561,9 +577,16 @@
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <a href="{{ route('product.category', $vproduct->category->slug) }}">{{ $vproduct->category->name }}</a>
+                                        </div>
+                                        <div class="product-price">
+                                            <span><a href="{{ route('label', $vproduct->label->slug) }}">{{ $vproduct->label->name }}</a></span>
+                                        </div>
                                         <h2>
                                             <a href="{{ route('product.details', $vproduct->slug) }}">{{ $vproduct->name }}</a>
                                         </h2>
+
                                         <div>
                                             @if($vproduct->sale !==0)
                                                 <span>
@@ -589,6 +612,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endif
                         @endforeach
                         <!--End product-cart-wrap-2-->
                         </div>

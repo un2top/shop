@@ -35,8 +35,10 @@ return new class extends Migration
             $table->unsignedBigInteger('quantity')->default(10);
             $table->string('image');
             $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->bigInteger('label_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreign('label_id')->references('id')->on('labels')->cascadeOnDelete();
         });
     }
 
