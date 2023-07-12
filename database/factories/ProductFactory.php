@@ -22,19 +22,21 @@ class ProductFactory extends Factory
 //        $regular_price = $this->faker->numberBetween(100, 1000);
         $sale = $this->faker->boolean(70) * $this->faker->numberBetween(40, 70);
         $a = ['Назначение', 'Состав', 'Особенности модели', 'Уход за вещами', 'Тип посадки', 'Рисунок',];
+        $material = ['замша', 'лайкра', 'джинса', 'полиэстр', 'мутон', 'флис',];
         return [
             'name' => $productName,
             'slug' => $slug,
             'sort_description' => $this->faker->text(200),
             'description' => $this->faker->text(1000),
-//            'regular_price' => $regular_price,
             'sale' => $sale,
-//            'sale_price' => $sale != 0 ? $regular_price - $regular_price * ($sale / 100) : $regular_price,
             'SKU' => 'PRD' . $this->faker->unique()->numberBetween(100, 500),
-            'stock_status' => 'instock',
+
+//            'regular_price' => $regular_price,
+//            'sale_price' => $sale != 0 ? $regular_price - $regular_price * ($sale / 100) : $regular_price,
+//            'stock_status' => 'instock',
 //            'quantity' => $this->faker->numberBetween(10, 50),
 
-            'appointment' => $this->faker->text(30),
+            'material' => $this->faker->randomElement($material),
             'composition' => $this->faker->text(30),
             'features' => $this->faker->text(30),
             'taking_care' => $this->faker->text(30),

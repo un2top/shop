@@ -87,9 +87,6 @@
                                             <li><a class="{{ $orderBy == 'Сначала популярные' ? 'active': '' }}" href="#"
                                                    wire:click.prevent="changeOrderBy('Сначала популярные')">Сначала популярные</a>
                                             </li>
-                                            <li><a class="{{ $orderBy == 'Сначала по отзывам' ? 'active': '' }}" href="#"
-                                                   wire:click.prevent="changeOrderBy('Сначала популярные')">Сначала по отзывам</a>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -133,7 +130,7 @@
                                             <div class="product-price">
                                                 @if($product->sale !==0)
                                                     <span>
-                                                    ${{ $product->sred_price }}
+                                                    ${{$product->sred_price*($product->sale/100) }}
                                                 </span>
                                                     <span class="old-price">
                                                     ${{ $product->sred_price }}
@@ -151,7 +148,7 @@
                                                         <i class="fi-rs-heart"></i></a>
                                                 @endif
                                                 <a aria-label="В корзину" class="action-btn hover-up" href="#"
-                                                   wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->sred_price }})"><i
+                                                   wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->sred_price*($product->sale/100) }})"><i
                                                         class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
@@ -196,6 +193,35 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <form wire:submit.prevent="parametrSort">
+                            <div class="list-group">
+                                <div class="list-group-item mb-10 mt-10">
+                                    <div class="custome-checkbox">
+                                        <input class="form-check-input" type="checkbox" name="checkbox" wire:model="isSales"
+                                               id="exampleCheckbox1" value="">
+                                        <label class="form-check-label" for="exampleCheckbox1"><span>Товары по акции</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-select" wire:model="label">
+                                    <option selected="selected" disabled="disabled">Продавец</option>
+                                    @foreach($labels as $label)
+                                        <option value="{{ $label->label_name }}">{{ $label->label_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-select" multiple size="3" wire:model="prodMaterials">
+                                    <option disabled="disabled">Материал</option>
+                                    @foreach($materials as $material)
+                                        <option value="{{ $material->material_name }}">{{ $material->material_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                                <button type="submit" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Показать</button>
+                            </form>
                         </div>
                         <!-- Product sidebar Widget -->
                         <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">

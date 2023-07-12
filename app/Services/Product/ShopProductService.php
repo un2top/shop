@@ -74,7 +74,95 @@ class ShopProductService
             ->groupBy('products.id')
             ->havingRaw('sred_price BETWEEN ? AND ?', [$min, $max])
             ->orderBy('comments_quantity', 'desc');
-
     }
+    public function salesProductsWithAvg($min, $max){
+        return DB::table('products')
+            ->join('label_product', 'products.id', '=', 'label_product.product_id')
+            ->join('labels', 'label_product.label_id', '=', 'labels.id')
+            ->select('products.name as name', 'products.sale as sale', 'products.slug as slug',
+                'products.image as image', 'products.id as id','products.sort_description as sort_description',
+                DB::raw('ROUND(AVG(label_product.regular_price),1) as sred_price'))
+            ->where('products.sale','>',  0)
+            ->groupBy('products.name')
+            ->havingRaw('sred_price BETWEEN ? AND ?', [$min, $max])
+            ->where('products.saleday',  '!=',1)
+            ->orderBy('products.sale', 'desc');
+    }
+
+    public function labeslName(){
+        return DB::table('label_product')
+            ->join('labels', 'label_product.label_id', '=', 'labels.id')
+            ->select( 'labels.name as label_name', 'labels.id as label_id')
+            ->distinct()
+            ->get();
+    }
+    public function materialName(){
+        return DB::table('products')
+            ->select( 'products.material as material_name')
+            ->distinct()
+            ->get();
+    }
+    public function parametrSort(int $min, int $max, int $isSales=null, string $label=null, array $materials=[]){
+        $query = DB::table('products')
+            ->join('label_product', 'products.id', '=', 'label_product.product_id')
+            ->join('labels', 'label_product.label_id', '=', 'labels.id')
+            ->select(
+                'products.name',
+                'products.id',
+                'products.sale',
+                'products.slug',
+                'products.sort_description',
+                'products.image',
+                'products.material',
+                DB::raw('GROUP_CONCAT(labels.name) AS label_names'),
+                DB::raw('ROUND(AVG(label_product.regular_price), 1) AS sred_price')
+            )
+            ->groupBy(
+                'products.name',
+                'products.sale',
+                'products.slug',
+                'products.image',
+                'products.material'
+            )
+            ->havingRaw('sred_price BETWEEN ? AND ?', [$min, $max]);
+
+        if ($isSales) {
+            $query->where('products.sale', '>', 0);
+        }
+
+        if ($label) {
+            $query->where('labels.name', '=', $label);
+        }
+
+        if (!empty($materials)) {
+            $query->whereIn('products.material', $materials);
+        }
+
+        return $query;
+    }
+
+
+
+
+    //        $result = DB::table('products')
+//            ->join('label_product', 'products.id', '=', 'label_product.product_id')
+//            ->join('labels', 'label_product.label_id', '=', 'labels.id')
+//            ->select(
+//                'products.name',
+//                'products.sale',
+//                'products.slug',
+//                'products.image',
+//                'products.material',
+//                DB::raw('GROUP_CONCAT(labels.name) AS label_names'),
+//                DB::raw('ROUND(AVG(label_product.regular_price), 1) AS sred_price')
+//            )
+//            ->groupBy(
+//                'products.name',
+//                'products.sale',
+//                'products.slug',
+//                'products.image',
+//                'products.material'
+//            )
+//            ->get();
 
 }
