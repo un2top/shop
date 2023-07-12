@@ -19,9 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('sort_description')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('regular_price',8,2);
             $table->integer('sale')->nullable();
-            $table->decimal('sale_price',8,2);
             $table->string('SKU');
             $table->string('appointment')->nullable();
             $table->string('composition')->nullable();
@@ -32,13 +30,10 @@ return new class extends Migration
             $table->enum('stock_status', ['instock', 'outofstock']);
             $table->boolean('featured')->default(false);
             $table->boolean('saleday')->default(false);
-            $table->unsignedBigInteger('quantity')->default(10);
             $table->string('image');
             $table->bigInteger('category_id')->unsigned()->nullable();
-            $table->bigInteger('label_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
-            $table->foreign('label_id')->references('id')->on('labels')->cascadeOnDelete();
         });
     }
 

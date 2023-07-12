@@ -72,22 +72,23 @@
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="{{ $orderBy == 'По умолчанию' ? 'active': '' }}" href="#"
-                                                   wire:click.prevent="changeOrderBy('По умолчанию')">По умолчанию</a>
+                                            <li><a class="{{ $orderBy == 'Сначала по отзывам' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('Сначала по отзывам')">Сначала по отзывам</a>
                                             </li>
                                             <li><a class="{{ $orderBy == 'Сначала недорогие' ? 'active': '' }}" href="#"
-                                                   wire:click.prevent="changeOrderBy('Сначала недорогие')">Сначала
-                                                    недорогие</a>
+                                                   wire:click.prevent="changeOrderBy('Сначала недорогие')">Сначала недорогие</a>
                                             </li>
                                             <li><a class="{{ $orderBy == 'Сначала дорогие' ? 'active': '' }}" href="#"
-                                                   wire:click.prevent="changeOrderBy('Сначала дорогие')">Сначала
-                                                    дорогие</a>
+                                                   wire:click.prevent="changeOrderBy('Сначала дорогие')">Сначала дорогие</a>
                                             </li>
                                             <li><a class="{{ $orderBy == 'Сначала новые' ? 'active': '' }}" href="#"
                                                    wire:click.prevent="changeOrderBy('Сначала новые')">Сначала новые</a>
                                             </li>
                                             <li><a class="{{ $orderBy == 'Сначала популярные' ? 'active': '' }}" href="#"
                                                    wire:click.prevent="changeOrderBy('Сначала популярные')">Сначала популярные</a>
+                                            </li>
+                                            <li><a class="{{ $orderBy == 'Сначала по отзывам' ? 'active': '' }}" href="#"
+                                                   wire:click.prevent="changeOrderBy('Сначала популярные')">Сначала по отзывам</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -103,7 +104,7 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('product.details', ['slug'=>$product->slug]) }}">
+                                                <a href="{{ route('product.details', $product->slug) }}">
                                                     <img class="default-img"
                                                          src="{{ asset('assets/imgs/products')}}/{{ $product->image }}"
                                                          alt="{{ $product->name }}" width="280" height="280">
@@ -112,12 +113,12 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="{{ route('product.category', ['slug'=>$product->category->slug]) }}">{{ $product->category->name }}</a>
+                                                <a href="{{ route('product.details', $product->slug)  }}">{{ Str::limit(($product->sort_description), 30) }}</a>
                                             </div>
-                                            <div class="product-price">
-                                                <span><a href="{{ route('label', $product->label->slug) }}">{{ $product->label->name }}</a></span>
-                                            </div>
-                                            <h2><a href="{{ route('product.details', ['slug'=>$product->slug]) }}">{{ $product->name }}</a></h2>
+{{--                                            <div class="product-price">--}}
+{{--                                                <span><a href="{{ route('label', $product->labels->slug) }}">{{ $product->labels->name }}</a></span>--}}
+{{--                                            </div>--}}
+                                            <h2><a href="{{ route('product.details', $product->slug) }}">{{ $product->name }}</a></h2>
                                             <div>
                                                 @if($product->sale !==0)
                                                     <span>
@@ -132,13 +133,13 @@
                                             <div class="product-price">
                                                 @if($product->sale !==0)
                                                     <span>
-                                                    ${{ $product->sale_price }}
+                                                    ${{ $product->sred_price }}
                                                 </span>
                                                     <span class="old-price">
-                                                    ${{ $product->regular_price }}
+                                                    ${{ $product->sred_price }}
                                                 </span>
                                                 @else
-                                                    <span>${{ $product->regular_price }} </span>
+                                                    <span>${{ $product->sred_price }} </span>
                                                 @endif
                                             </div>
                                             <div class="product-action-1 show">
@@ -146,11 +147,11 @@
                                                     <a aria-label="Удалить из избраного" class="action-btn hover-up wishlisted"
                                                        href="#" wire:click.prevent="removeFromWishList({{ $product->id }})"><i class="fi-rs-heart"></i></a>
                                                 @else
-                                                    <a aria-label="Добавить в избранное" class="action-btn hover-up" href="#" wire:click.prevent="addToWitchList({{ $product->id }}, '{{$product->name}}', {{ $product->sale_price }})">
+                                                    <a aria-label="Добавить в избранное" class="action-btn hover-up" href="#" wire:click.prevent="addToWitchList({{ $product->id }}, '{{$product->name}}', {{ $product->sred_price }})">
                                                         <i class="fi-rs-heart"></i></a>
                                                 @endif
                                                 <a aria-label="В корзину" class="action-btn hover-up" href="#"
-                                                   wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->sale_price }})"><i
+                                                   wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->sred_price }})"><i
                                                         class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>

@@ -22,4 +22,9 @@ class Order extends Model
     public function transaction(){
         return $this->hasOne(Transaction::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)->withPivot('quantity');
+    }
 }

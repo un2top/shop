@@ -17,12 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('subtotal');
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('address');
+            $table->string('name');
             $table->string('email');
-            $table->string('town');
-            $table->string('postIndex');
             $table->string('telephone');
             $table->enum('status',['ordered', 'delivered', 'canceled'])->default('ordered');
             $table->enum('paymentmode',['cod', 'codcard', 'card'])->default('cod');

@@ -22,7 +22,7 @@ class CommentFactory extends Factory
 
         return [
             'user_id' => $this->faker->numberBetween(1, 2),
-            'product_slug' => $this->faker->randomElement(Product::pluck('slug')->toArray()),
+            'product_id' => $this->faker->randomElement(Product::pluck('id')->toArray()),
             'content' => $this->faker->unique()->text(120),
         ];
     }

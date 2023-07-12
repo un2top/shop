@@ -19,7 +19,7 @@ class ProductFactory extends Factory
     {
         $productName = $this->faker->unique()->text(30);
         $slug = Str::slug($productName, '-');
-        $regular_price = $this->faker->numberBetween(100, 1000);
+//        $regular_price = $this->faker->numberBetween(100, 1000);
         $sale = $this->faker->boolean(70) * $this->faker->numberBetween(40, 70);
         $a = ['Назначение', 'Состав', 'Особенности модели', 'Уход за вещами', 'Тип посадки', 'Рисунок',];
         return [
@@ -27,12 +27,12 @@ class ProductFactory extends Factory
             'slug' => $slug,
             'sort_description' => $this->faker->text(200),
             'description' => $this->faker->text(1000),
-            'regular_price' => $regular_price,
+//            'regular_price' => $regular_price,
             'sale' => $sale,
-            'sale_price' => $sale != 0 ? $regular_price - $regular_price * ($sale / 100) : $regular_price,
+//            'sale_price' => $sale != 0 ? $regular_price - $regular_price * ($sale / 100) : $regular_price,
             'SKU' => 'PRD' . $this->faker->unique()->numberBetween(100, 500),
             'stock_status' => 'instock',
-            'quantity' => $this->faker->numberBetween(10, 50),
+//            'quantity' => $this->faker->numberBetween(10, 50),
 
             'appointment' => $this->faker->text(30),
             'composition' => $this->faker->text(30),
@@ -43,9 +43,7 @@ class ProductFactory extends Factory
 
             'image' => $this->faker->numberBetween(1, 27) . '.jpg',
             'category_id' => $this->faker->numberBetween(1, 11),
-            'label_id' => $this->faker->numberBetween(1, 3),
             'featured' => $this->faker->boolean(70),
-
         ];
     }
 }
